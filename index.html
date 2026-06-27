@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>R&M CYBER LAB | Portfolio</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #05070C;
+        }
+        .tech-font {
+            font-family: 'Orbitron', sans-serif;
+        }
+        /* تأثير الخلفية المتوهجة المتحركة */
+        .cyber-bg {
+            background: radial-gradient(circle at 50% 50%, #0b1528 0%, #05070C 100%);
+        }
+        /* تأثير الزجاج */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: #00D2FF;
+            box-shadow: 0 0 25px rgba(0, 210, 255, 0.15);
+            transform: translateY(-5px);
+        }
+        /* أنيميشن التوهج المخصص */
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.05); }
+        }
+        .glow-orb {
+            animation: pulse-glow 8s infinite ease-in-out;
+        }
+    </style>
+</head>
+<body class="text-slate-200 overflow-x-hidden cyber-bg selection:bg-cyan-500 selection:text-slate-900">
+
+    <div class="absolute top-20 left-10 w-96 h-96 bg-cyan-500/10 rounded-full blur-[120px] glow-orb pointer-events-none"></div>
+    <div class="absolute top-[40%] right-10 w-[450px] h-[450px] bg-purple-600/10 rounded-full blur-[150px] glow-orb pointer-events-none" style="animation-delay: 2s;"></div>
+    <div class="absolute bottom-20 left-20 w-80 h-80 bg-blue-600/10 rounded-full blur-[100px] glow-orb pointer-events-none" style="animation-delay: 4s;"></div>
+
+    <header class="min-h-screen flex flex-col justify-center items-center relative px-4 text-center">
+        <div class="glass-card p-8 md:p-16 rounded-3xl max-w-4xl border-cyan-500/20 shadow-[0_0_50px_rgba(0,0,0,0.5)]">
+            <h1 class="tech-font text-6xl md:text-8xl font-black tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 mb-2 drop-shadow-[0_0_30px_rgba(0,210,255,0.3)]">
+                R&M
+            </h1>
+            <p class="tech-font text-2xl md:text-3xl font-bold tracking-[0.2em] text-slate-400 mb-6">CYBER LAB</p>
+            
+            <div class="h-[1px] w-40 bg-gradient-to-r from-transparent via-cyan-400 to-transparent mx-auto mb-6"></div>
+            
+            <h2 class="text-xl md:text-2xl font-semibold text-slate-300 mb-4">مشروع شخصي .. رحلة لا تتوقف</h2>
+            <p class="tech-font text-cyan-400 font-medium tracking-wide text-sm md:text-base bg-cyan-950/40 px-4 py-2 rounded-full border border-cyan-500/30 inline-block mb-8">
+                Building. Breaking. Learning. Securing.
+            </p>
+
+            <div class="flex flex-wrap justify-center gap-6 text-sm text-slate-400 font-medium">
+                <span class="hover:text-cyan-400 transition-colors cursor-default"><i class="fa-solid fa-graduation-cap text-cyan-400 ml-1"></i> نتعلم</span>
+                <span class="text-slate-600">|</span>
+                <span class="hover:text-cyan-400 transition-colors cursor-default"><i class="fa-solid fa-laptop-code text-cyan-400 ml-1"></i> نطبق</span>
+                <span class="text-slate-600">|</span>
+                <span class="hover:text-cyan-400 transition-colors cursor-default"><i class="fa-solid fa-lightbulb text-cyan-400 ml-1"></i> نبتكر</span>
+                <span class="text-slate-600">|</span>
+                <span class="hover:text-cyan-400 transition-colors cursor-default"><i class="fa-solid fa-share-nodes text-cyan-400 ml-1"></i> netشارك</span>
+            </div>
+        </div>
+
+        <a href="#about" class="absolute bottom-10 text-slate-500 hover:text-cyan-400 transition-colors text-2xl animate-bounce">
+            <i class="fa-solid fa-chevron-down"></i>
+        </a>
+    </header>
+
+    <section class="max-w-5xl mx-auto px-4 py-12 text-center">
+        <div class="glass-card py-6 px-8 rounded-2xl flex flex-col md:flex-row items-center justify-center gap-4 border-purple-500/20">
+            <div class="w-12 h-12 rounded-full bg-gradient-to-tr from-purple-600 to-cyan-400 flex items-center justify-center text-xl shadow-[0_0_15px_rgba(138,43,226,0.4)]">
+                <i class="fa-solid fa-users-gear"></i>
+            </div>
+            <p class="text-lg md:text-xl text-slate-300 leading-relaxed max-w-3xl">
+                نحن <span class="text-cyan-400 font-bold">مشعل (M)</span> من جامعة الملك خالد في أبها، و<span class="text-purple-400 font-bold">ريماس (R)</span> من جامعة بيشة في بيشة. نجمع بين الشغف والمعرفة لبناء مشاريع سيبرانية حقيقية تصنع فرقاً.
+            </p>
+        </div>
+    </section>
+
+    <section id="about" class="max-w-6xl mx-auto px-4 py-16">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-slate-100 to-slate-400">الملف الأكاديمي والمهني</h2>
+            <div class="h-1 w-20 bg-cyan-500 mx-auto mt-3 rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="glass-card p-8 rounded-3xl relative overflow-hidden group border-blue-600/20">
+                <div class="absolute -top-10 -left-10 text-9xl font-black tech-font text-blue-500/5 group-hover:text-blue-500/10 transition-colors select-none">M</div>
+                
+                <div class="flex flex-col sm:flex-row items-center gap-5 mb-6 relative z-10">
+                    <div class="w-24 h-24 rounded-full border-2 border-cyan-400 overflow-hidden shadow-[0_0_20px_rgba(0,210,255,0.4)] bg-slate-900 shrink-0">
+                        <img src="meshal.png" alt="مشعل الجذمي" class="w-full h-full object-cover onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=meshal'">
+                    </div>
+                    <div class="text-center sm:text-right">
+                        <span class="text-[11px] font-bold uppercase tracking-wider text-blue-400 bg-blue-950/50 px-3 py-1 rounded-full border border-blue-500/30">جامعة الملك خالد - أبها</span>
+                        <h3 class="text-2xl font-bold mt-2 text-slate-100">مشعل الجذمي</h3>
+                    </div>
+                </div>
+
+                <p class="text-slate-300 mb-6 leading-relaxed">
+                    خريج تخصص <span class="text-white font-semibold">نظم المعلومات</span> بمسار الأمن السيبراني. مبني على أسس أكاديمية متينة ومدعّم باعتمادات جودة رفيعة المستوى تضمن كفاءة الحلول والممارسات التقنية.
+                </p>
+                <div class="space-y-3 pt-4 border-t border-slate-800">
+                    <div class="flex items-center gap-3 text-sm text-slate-400">
+                        <i class="fa-solid fa-award text-amber-400 text-base"></i>
+                        <span>الاعتماد المحلي الوطني: <strong class="text-slate-200 font-semibold tech-font">NCAAA</strong></span>
+                    </div>
+                    <div class="flex items-center gap-3 text-sm text-slate-400">
+                        <i class="fa-solid fa-ribbon text-cyan-400 text-base"></i>
+                        <span>الاعتماد الدولي الأمريكي: <strong class="text-slate-200 font-semibold tech-font">ABET</strong></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-card p-8 rounded-3xl relative overflow-hidden group border-purple-600/20">
+                <div class="absolute -top-10 -left-10 text-9xl font-black tech-font text-purple-500/5 group-hover:text-purple-500/10 transition-colors select-none">R</div>
+                
+                <div class="flex flex-col sm:flex-row items-center gap-5 mb-6 relative z-10">
+                    <div class="w-24 h-24 rounded-full border-2 border-purple-400 overflow-hidden shadow-[0_0_20px_rgba(138,43,226,0.4)] bg-slate-900 shrink-0">
+                        <img src="reemas.png" alt="ريماس القحطاني" class="w-full h-full object-cover onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=reemas'">
+                    </div>
+                    <div class="text-center sm:text-right">
+                        <span class="text-[11px] font-bold uppercase tracking-wider text-purple-400 bg-purple-950/50 px-3 py-1 rounded-full border border-purple-500/30">جامعة بيشة - بيشة</span>
+                        <h3 class="text-2xl font-bold mt-2 text-slate-100">ريماس القحطاني</h3>
+                    </div>
+                </div>
+
+                <p class="text-slate-300 mb-6 leading-relaxed">
+                    طالبة في تخصص <span class="text-white font-semibold">الأمن السيبراني</span> في سنتها الرابعة والأخيرة. شغوفة بالبحث والتحليل واكتشاف الثغرات الرقمية وتطوير استراتيجيات دفاعية ذكية لمواكبة التحديات الحديثة.
+                </p>
+                <div class="space-y-3 pt-4 border-t border-slate-800">
+                    <div class="flex items-center gap-3 text-sm text-slate-400">
+                        <i class="fa-solid fa-hourglass-half text-purple-400 text-base"></i>
+                        <span>المرحلة الحالية: <strong class="text-slate-200 font-semibold">السنة الرابعة والأخيرة (مقبلة على التخرج)</strong></span>
+                    </div>
+                    <div class="flex items-center gap-3 text-sm text-slate-400">
+                        <i class="fa-solid fa-crosshairs text-rose-400 text-base"></i>
+                        <span>التركيز الأساسي: <strong class="text-slate-200 font-semibold">تطوير وبناء مجتمع سيبراني آمن</strong></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="max-w-6xl mx-auto px-4 py-16">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-slate-100 to-slate-400">مشاريعنا قيد التنفيذ</h2>
+            <p class="text-slate-400 text-sm mt-2">بيئة معملية متكاملة لمحاكاة التهديدات وبناء الأنظمة الدفاعية</p>
+            <div class="h-1 w-20 bg-purple-500 mx-auto mt-3 rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="glass-card p-6 rounded-2xl flex flex-col justify-between">
+                <div>
+                    <div class="w-12 h-12 rounded-xl bg-cyan-950/60 border border-cyan-500/30 flex items-center justify-center text-cyan-400 text-xl mb-4 shadow-[0_0_15px_rgba(0,210,255,0.1)]">
+                        <i class="fa-solid fa-shield-cat"></i>
+                    </div>
+                    <h3 class="tech-font text-lg font-bold text-white mb-1">Mini SOC</h3>
+                    <span class="text-xs text-cyan-400 font-medium">نظام كشف التهديدات ومراقبة الأحداث</span>
+                    <p class="text-sm text-slate-400 mt-3 leading-relaxed">بناء مركز عمليات أمنية مصغر يتيح الرؤية الكاملة والتحليل الفوري للأحداث الأمنية داخل بيئة العمل.</p>
+                </div>
+            </div>
+
+            <div class="glass-card p-6 rounded-2xl flex flex-col justify-between">
+                <div>
+                    <div class="w-12 h-12 rounded-xl bg-purple-950/60 border border-purple-500/30 flex items-center justify-center text-purple-400 text-xl mb-4 shadow-[0_0_15px_rgba(138,43,226,0.1)]">
+                        <i class="fa-solid fa-chart-network"></i>
+                    </div>
+                    <h3 class="tech-font text-lg font-bold text-white mb-1">Security Monitoring</h3>
+                    <span class="text-xs text-purple-400 font-medium">منصة لمراقبة الأجهزة والشبكات والتنبيهات</span>
+                    <p class="text-sm text-slate-400 mt-3 leading-relaxed">تجميع سجلات الأحداث (Logs) بذكاء من كافة الأنظمة والشبكات وتحليلها لإصدار تنبيهات مبكرة عند أي نشاط مريب.</p>
+                </div>
+            </div>
+
+            <div class="glass-card p-6 rounded-2xl flex flex-col justify-between">
+                <div>
+                    <div class="w-12 h-12 rounded-xl bg-blue-950/60 border border-blue-500/30 flex items-center justify-center text-blue-400 text-xl mb-4 shadow-[0_0_15px_rgba(30,64,175,0.1)]">
+                        <i class="fa-solid fa-fingerprint"></i>
+                    </div>
+                    <h3 class="tech-font text-lg font-bold text-white mb-1">Digital Forensics Lab</h3>
+                    <span class="text-xs text-blue-400 font-medium">مختبر للتحقيق الرقمي وتحليل الأدلة</span>
+                    <p class="text-sm text-slate-400 mt-3 leading-relaxed">فحص وتحليل الآثار الرقمية الناتجة عن الاختراقات، واستخراج الأدلة الجنائية لتوثيق الهجمات وتفادي تكرارها.</p>
+                </div>
+            </div>
+
+            <div class="glass-card p-6 rounded-2xl flex flex-col justify-between">
+                <div>
+                    <div class="w-12 h-12 rounded-xl bg-emerald-950/60 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-xl mb-4 shadow-[0_0_15px_rgba(16,185,129,0.1)]">
+                        <i class="fa-solid fa-magnifying-glass-chart"></i>
+                    </div>
+                    <h3 class="tech-font text-lg font-bold text-white mb-1">Behavioral Analysis</h3>
+                    <span class="text-xs text-emerald-400 font-medium">تحليل سلوك المستخدم وكشف الأنشطة الشاذة</span>
+                    <p class="text-sm text-slate-400 mt-3 leading-relaxed">الاعتماد على النمذجة السلوكية للتعرف على السلوكيات غير الاعتيادية التي قد تشير إلى اختراق الحسابات أو تسريب البيانات.</p>
+                </div>
+            </div>
+
+            <div class="glass-card p-6 rounded-2xl flex flex-col justify-between">
+                <div>
+                    <div class="w-12 h-12 rounded-xl bg-amber-950/60 border border-amber-500/30 flex items-center justify-center text-amber-400 text-xl mb-4 shadow-[0_0_15px_rgba(245,158,11,0.1)]">
+                        <i class="fa-solid fa-radar"></i>
+                    </div>
+                    <h3 class="tech-font text-lg font-bold text-white mb-1">Vulnerability Scanner</h3>
+                    <span class="text-xs text-amber-400 font-medium">فحص الثغرات وتقييم المخاطر</span>
+                    <p class="text-sm text-slate-400 mt-3 leading-relaxed">فحص مستمر ومؤتمت للبنية التحتية والشبكات لتقييم الثغرات الأمنية وترتيبها حسب درجة خطورتها قبل استغلالها.</p>
+                </div>
+            </div>
+
+            <div class="glass-card p-6 rounded-2xl flex flex-col justify-between">
+                <div>
+                    <div class="w-12 h-12 rounded-xl bg-rose-950/60 border border-rose-500/30 flex items-center justify-center text-rose-400 text-xl mb-4 shadow-[0_0_15px_rgba(244,63,94,0.1)]">
+                        <i class="fa-solid fa-brain"></i>
+                    </div>
+                    <h3 class="tech-font text-lg font-bold text-white mb-1">Threat Intelligence</h3>
+                    <span class="text-xs text-rose-400 font-medium">جمع وتحليل معلومات التهديدات السيبرانية</span>
+                    <p class="text-sm text-slate-400 mt-3 leading-relaxed">استباق الهجمات من خلال تتبع وتحليل مصادر التهديد والمؤشرات الحيوية للاختراق (IoCs) لتعزيز الدفاعات مسبقاً.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="max-w-6xl mx-auto px-4 py-16 grid grid-cols-1 lg:grid-cols-12 gap-12">
+        
+        <div class="lg:col-span-7">
+            <h2 class="text-2xl font-black text-white mb-8 flex items-center gap-3">
+                <span class="w-2 h-6 bg-cyan-400 rounded-full"></span> المهارات التي نطورها
+            </h2>
+            <div class="space-y-5 glass-card p-6 rounded-3xl">
+                <div>
+                    <div class="flex justify-between text-sm mb-1">
+                        <span class="text-slate-300 font-medium"><i class="fa-solid fa-shield-halved text-cyan-400 ml-1"></i> الأمن السيبراني</span>
+                        <span class="tech-font text-cyan-400 font-bold">90%</span>
+                    </div>
+                    <div class="w-full bg-slate-900 h-2 rounded-full overflow-hidden border border-white/5">
+                        <div class="bg-gradient-to-r from-blue-500 to-cyan-400 h-full rounded-full" style="width: 90%"></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex justify-between text-sm mb-1">
+                        <span class="text-slate-300 font-medium"><i class="fa-solid fa-network-wired text-cyan-400 ml-1"></i> أمن الشبكات</span>
+                        <span class="tech-font text-cyan-400 font-bold">85%</span>
+                    </div>
+                    <div class="w-full bg-slate-900 h-2 rounded-full overflow-hidden border border-white/5">
+                        <div class="bg-gradient-to-r from-blue-500 to-cyan-400 h-full rounded-full" style="width: 85%"></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex justify-between text-sm mb-1">
+                        <span class="text-slate-300 font-medium"><i class="fa-brands fa-linux text-cyan-400 ml-1"></i> لينكس</span>
+                        <span class="tech-font text-cyan-400 font-bold">90%</span>
+                    </div>
+                    <div class="w-full bg-slate-900 h-2 rounded-full overflow-hidden border border-white/5">
+                        <div class="bg-gradient-to-r from-blue-500 to-cyan-400 h-full rounded-full" style="width: 90%"></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex justify-between text-sm mb-1">
+                        <span class="text-slate-300 font-medium"><i class="fa-brands fa-python text-cyan-400 ml-1"></i> بايثون</span>
+                        <span class="tech-font text-cyan-400 font-bold">88%</span>
+                    </div>
+                    <div class="w-full bg-slate-900 h-2 rounded-full overflow-hidden border border-white/5">
+                        <div class="bg-gradient-to-r from-blue-500 to-cyan-400 h-full rounded-full" style="width: 88%"></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex justify-between text-sm mb-1">
+                        <span class="text-slate-300 font-medium"><i class="fa-solid fa-eye text-cyan-400 ml-1"></i> SOC Operations</span>
+                        <span class="tech-font text-cyan-400 font-bold">80%</span>
+                    </div>
+                    <div class="w-full bg-slate-900 h-2 rounded-full overflow-hidden border border-white/5">
+                        <div class="bg-gradient-to-r from-blue-500 to-cyan-400 h-full rounded-full" style="width: 80%"></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex justify-between text-sm mb-1">
+                        <span class="text-slate-300 font-medium"><i class="fa-solid fa-vial-virus text-cyan-400 ml-1"></i> تحليل التهديدات</span>
+                        <span class="tech-font text-cyan-400 font-bold">80%</span>
+                    </div>
+                    <div class="w-full bg-slate-900 h-2 rounded-full overflow-hidden border border-white/5">
+                        <div class="bg-gradient-to-r from-blue-500 to-cyan-400 h-full rounded-full" style="width: 80%"></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex justify-between text-sm mb-1">
+                        <span class="text-slate-300 font-medium"><i class="fa-solid fa-kit-medical text-cyan-400 ml-1"></i> الاستجابة للحوادث</span>
+                        <span class="tech-font text-cyan-400 font-bold">75%</span>
+                    </div>
+                    <div class="w-full bg-slate-900 h-2 rounded-full overflow-hidden border border-white/5">
+                        <div class="bg-gradient-to-r from-blue-500 to-cyan-400 h-full rounded-full" style="width: 75%"></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex justify-between text-sm mb-1">
+                        <span class="text-slate-300 font-medium"><i class="fa-solid fa-database text-cyan-400 ml-1"></i> قواعد البيانات (SQL)</span>
+                        <span class="tech-font text-cyan-400 font-bold">70%</span>
+                    </div>
+                    <div class="w-full bg-slate-900 h-2 rounded-full overflow-hidden border border-white/5">
+                        <div class="bg-gradient-to-r from-blue-500 to-cyan-400 h-full rounded-full" style="width: 70%"></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex justify-between text-sm mb-1">
+                        <span class="text-slate-300 font-medium"><i class="fa-solid fa-code text-cyan-400 ml-1"></i> البرمجة والأتمتة</span>
+                        <span class="tech-font text-cyan-400 font-bold">85%</span>
+                    </div>
+                    <div class="w-full bg-slate-900 h-2 rounded-full overflow-hidden border border-white/5">
+                        <div class="bg-gradient-to-r from-blue-500 to-cyan-400 h-full rounded-full" style="width: 85%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="lg:col-span-5 flex flex-col justify-between">
+            <div>
+                <h2 class="text-2xl font-black text-white mb-8 flex items-center gap-3">
+                    <span class="w-2 h-6 bg-purple-400 rounded-full"></span> الأدوات والتقنيات
+                </h2>
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                    <div class="glass-card p-4 rounded-xl flex flex-col items-center justify-center gap-2 text-center group">
+                        <i class="fa-brands fa-python text-3xl text-yellow-500 transition-transform group-hover:scale-110"></i>
+                        <span class="text-xs font-semibold tracking-wide tech-font">Python</span>
+                    </div>
+                    <div class="glass-card p-4 rounded-xl flex flex-col items-center justify-center gap-2 text-center group">
+                        <i class="fa-brands fa-linux text-3xl text-white transition-transform group-hover:scale-110"></i>
+                        <span class="text-xs font-semibold tracking-wide tech-font">Linux</span>
+                    </div>
+                    <div class="glass-card p-4 rounded-xl flex flex-col items-center justify-center gap-2 text-center group">
+                        <i class="fa-brands fa-docker text-3xl text-blue-400 transition-transform group-hover:scale-110"></i>
+                        <span class="text-xs font-semibold tracking-wide tech-font">Docker</span>
+                    </div>
+                    <div class="glass-card p-4 rounded-xl flex flex-col items-center justify-center gap-2 text-center group">
+                        <i class="fa-solid fa-shield text-3xl text-cyan-400 transition-transform group-hover:scale-110"></i>
+                        <span class="text-xs font-semibold tracking-wide tech-font">Wazuh</span>
+                    </div>
+                    <div class="glass-card p-4 rounded-xl flex flex-col items-center justify-center gap-2 text-center group">
+                        <i class="fa-solid fa-cubes text-3xl text-emerald-400 transition-transform group-hover:scale-110"></i>
+                        <span class="text-xs font-semibold tracking-wide tech-font">Elastic Stack</span>
+                    </div>
+                    <div class="glass-card p-4 rounded-xl flex flex-col items-center justify-center gap-2 text-center group">
+                        <i class="fa-solid fa-network-wired text-3xl text-blue-300 transition-transform group-hover:scale-110"></i>
+                        <span class="text-xs font-semibold tracking-wide tech-font">Wireshark</span>
+                    </div>
+                    <div class="glass-card p-4 rounded-xl flex flex-col items-center justify-center gap-2 text-center group">
+                        <i class="fa-solid fa-terminal text-3xl text-red-500 transition-transform group-hover:scale-110"></i>
+                        <span class="text-xs font-semibold tracking-wide tech-font">Kali Linux</span>
+                    </div>
+                    <div class="glass-card p-4 rounded-xl flex flex-col items-center justify-center gap-2 text-center group">
+                        <i class="fa-brands fa-github text-3xl text-slate-300 transition-transform group-hover:scale-110"></i>
+                        <span class="text-xs font-semibold tracking-wide tech-font">GitHub</span>
+                    </div>
+                    <div class="glass-card p-4 rounded-xl flex flex-col items-center justify-center gap-2 text-center group">
+                        <i class="fa-solid fa-code text-3xl text-sky-500 transition-transform group-hover:scale-110"></i>
+                        <span class="text-xs font-semibold tracking-wide tech-font">VS Code</span>
+                    </div>
+                    <div class="glass-card p-4 rounded-xl flex flex-col items-center justify-center gap-2 text-center group col-span-2 sm:col-span-1">
+                        <i class="fa-solid fa-database text-3xl text-blue-500 transition-transform group-hover:scale-110"></i>
+                        <span class="text-xs font-semibold tracking-wide tech-font">PostgreSQL</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-card p-6 rounded-2xl border-cyan-500/10 mt-6 lg:mt-0">
+                <h4 class="text-sm font-bold text-cyan-400 mb-3"><i class="fa-solid fa-bullseye ml-1"></i> أهدافنا الاستراتيجية</h4>
+                <ul class="text-xs text-slate-400 space-y-2 leading-relaxed">
+                    <li>• <strong class="text-slate-300">تطوير المهارات:</strong> صقل الخبرات في الأمن السيبراني والتحليل بشكل مستمر وعملي.</li>
+                    <li>• <strong class="text-slate-300">بناء حلول ذكية:</strong> تطوير أدوات برمجية حقيقية تواكب وتفكك أعقد التحديات الواقعية.</li>
+                    <li>• <strong class="text-slate-300">نشر المعرفة:</strong> المساهمة الفعّالة والإيجابية لبناء مجتمع تقني عربي آمن ومستدام.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="max-w-6xl mx-auto px-4 py-16">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            
+            <div>
+                <h2 class="text-2xl font-black text-white mb-8 flex items-center gap-3">
+                    <span class="w-2 h-6 bg-blue-500 rounded-full"></span> منهجيتنا في العمل
+                </h2>
+                <div class="space-y-4">
+                    <div class="glass-card p-4 rounded-xl flex gap-4 items-center">
+                        <span class="tech-font font-black text-xl text-cyan-400 bg-cyan-950/50 w-10 h-10 rounded-lg flex items-center justify-center border border-cyan-500/20">01</span>
+                        <div>
+                            <h4 class="font-bold text-sm text-slate-200">التخطيط</h4>
+                            <p class="text-xs text-slate-400 mt-0.5">تحديد المشكلة الأمنية بدقة تامة ورسم الهدف الفعلي للمشروع.</p>
+                        </div>
+                    </div>
+                    <div class="glass-card p-4 rounded-xl flex gap-4 items-center">
+                        <span class="tech-font font-black text-xl text-purple-400 bg-purple-950/50 w-10 h-10 rounded-lg flex items-center justify-center border border-purple-500/20">02</span>
+                        <div>
+                            <h4 class="font-bold text-sm text-slate-200">البحث والتجميع</h4>
+                            <p class="text-xs text-slate-400 mt-0.5">جمع كافة البيانات والمعلومات اللازمة وتحليل المتطلبات الفنية بعناية.</p>
+                        </div>
+                    </div>
+                    <div class="glass-card p-4 rounded-xl flex gap-4 items-center">
+                        <span class="tech-font font-black text-xl text-blue-400 bg-blue-950/50 w-10 h-10 rounded-lg flex items-center justify-center border border-blue-500/20">03</span>
+                        <div>
+                            <h4 class="font-bold text-sm text-slate-200">البناء</h4>
+                            <p class="text-xs text-slate-400 mt-0.5">كتابة الأكواد البرمجية المتينة وبناء الحلول الرقمية والدفاعية الهيكلية.</p>
+                        </div>
+                    </div>
+                    <div class="glass-card p-4 rounded-xl flex gap-4 items-center">
+                        <span class="tech-font font-black text-xl text-emerald-400 bg-emerald-950/50 w-10 h-10 rounded-lg flex items-center justify-center border border-emerald-500/20">04</span>
+                        <div>
+                            <h4 class="font-bold text-sm text-slate-200">الاختبار</h4>
+                            <p class="text-xs text-slate-400 mt-0.5">فحص الأنظمة وعمليات الاختراق التجريبي وتحليل النتائج للتأكد من سلامتها.</p>
+                        </div>
+                    </div>
+                    <div class="glass-card p-4 rounded-xl flex gap-4 items-center">
+                        <span class="tech-font font-black text-xl text-amber-400 bg-amber-950/50 w-10 h-10 rounded-lg flex items-center justify-center border border-amber-500/20">05</span>
+                        <div>
+                            <h4 class="font-bold text-sm text-slate-200">التحسين</h4>
+                            <p class="text-xs text-slate-400 mt-0.5">تطوير الأداء باستمرار وسد أي ثغرات متبقية لضمان أعلى مستويات الأمان.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-col justify-center">
+                <h2 class="text-2xl font-black text-white mb-8 flex items-center gap-3">
+                    <span class="w-2 h-6 bg-purple-500 rounded-full"></span> ما الذي يحفزنا؟
+                </h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="glass-card p-6 rounded-2xl border-rose-500/10">
+                        <i class="fa-solid fa-heart text-rose-500 text-2xl mb-3"></i>
+                        <h4 class="font-bold text-slate-200 mb-1">الشغف السيبراني</h4>
+                        <p class="text-xs text-slate-400 leading-relaxed">حب الاستكشاف وفهم كيف تدار الأنظمة الرقمية وكيف تحمى من التهديدات المتطورة عالمياً.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-2xl border-blue-500/10">
+                        <i class="fa-solid fa-graduation-cap text-blue-400 text-2xl mb-3"></i>
+                        <h4 class="font-bold text-slate-200 mb-1">التعلم المستمر</h4>
+                        <p class="text-xs text-slate-400 leading-relaxed">عالم الأمن الرقمي يتغير كل دقيقة، والوقوف في مكاننا ليس خياراً بل نسعى للنمو المتواصل المعرفي.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-2xl border-amber-500/10">
+                        <i class="fa-solid fa-puzzle-piece text-amber-400 text-2xl mb-3"></i>
+                        <h4 class="font-bold text-slate-200 mb-1">حل المعضلات</h4>
+                        <p class="text-xs text-slate-400 leading-relaxed">مواجهة المشكلات التقنية والأمنية المعقدة وتفكيكها خطوة بخطوة وإيجاد الحلول الذكية لها.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-2xl border-emerald-500/10">
+                        <i class="fa-solid fa-users text-emerald-400 text-2xl mb-3"></i>
+                        <h4 class="font-bold text-slate-200 mb-1">مجتمع آمن</h4>
+                        <p class="text-xs text-slate-400 leading-relaxed">المساهمة المباشرة والأصيلة في حماية الفضاء الرقمي للأفراد والمؤسسات لغدٍ أكثر موثوقية.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="mt-24 border-t border-slate-900 bg-[#030508]/80 backdrop-blur-md py-12 px-4 relative">
+        <div class="max-w-6xl mx-auto flex flex-col items-center text-center gap-8">
+            
+            <div class="max-w-2xl">
+                <i class="fa-solid fa-quote-right text-3xl text-cyan-500/30 mb-2 block"></i>
+                <p class="tech-font text-lg md:text-xl font-bold tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-400">
+                    "NOT JUST A PROJECT, IT'S OUR CYBERSECURITY JOURNEY. TOGETHER, WE GROW."
+                </p>
+            </div>
+
+            <div class="h-[1px] w-full max-w-md bg-slate-800"></div>
+
+            <div class="w-full flex flex-col md:flex-row items-center justify-between gap-6 px-4">
+                
+                <div class="text-right order-2 md:order-1">
+                    <p class="text-xs text-slate-500">Created by:</p>
+                    <h5 class="tech-font text-base font-bold text-slate-200 mt-0.5">
+                        <span class="text-blue-400">Meshal</span> & <span class="text-purple-400">Reemas</span>
+                    </h5>
+                    <p class="text-[11px] text-slate-400 mt-1">مشعل (M) - جامعة الملك خالد | ريماس (R) - جامعة بيشة</p>
+                </div>
+
+                <div class="flex items-center gap-4 order-1 md:order-2">
+                    <a href="https://github.com" target="_blank" class="w-11 h-11 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:border-white transition-all hover:shadow-[0_0_15px_rgba(255,255,255,0.1)]" title="GitHub">
+                        <i class="fa-brands fa-github text-xl"></i>
+                    </a>
+                    <a href="https://linkedin.com" target="_blank" class="w-11 h-11 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-cyan-400 hover:border-cyan-500 transition-all hover:shadow-[0_0_15px_rgba(0,210,255,0.2)]" title="LinkedIn">
+                        <i class="fa-brands fa-linkedin-in text-xl"></i>
+                    </a>
+                </div>
+
+                <div class="flex items-center gap-3 order-3">
+                    <div class="text-left hidden sm:block">
+                        <p class="text-xs font-bold text-slate-300">تابع رحلتنا</p>
+                        <p class="text-[10px] text-slate-500">امسح الكود لمتابعة المستجدات</p>
+                    </div>
+                    <div class="w-14 h-14 bg-white p-1 rounded-lg border border-cyan-500/30 shadow-[0_0_15px_rgba(0,210,255,0.1)]">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://github.com" alt="QR Code" class="w-full h-full object-cover">
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="w-full pt-6 border-t border-slate-900 flex flex-wrap justify-center gap-6 text-[11px] text-slate-600 font-medium tracking-wider">
+                <span><i class="fa-solid fa-graduation-cap ml-0.5"></i> تعلم مستمر</span>
+                <span><i class="fa-solid fa-lightbulb ml-0.5"></i> ابتكار</span>
+                <span><i class="fa-solid fa-users ml-0.5"></i> تعاون</span>
+                <span><i class="fa-solid fa-arrow-up-right-dots ml-0.5"></i> تطوير مستمر</span>
+                <span><i class="fa-solid fa-shield-halved ml-0.5"></i> أثر حقيقي</span>
+            </div>
+
+        </div>
+    </footer>
+
+</body>
+</html>
