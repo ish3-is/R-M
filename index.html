@@ -18,17 +18,29 @@
         .tech-font {
             font-family: 'Orbitron', sans-serif;
         }
-        /* تأثير الخلفية المتوهجة المتحركة */
         .cyber-bg {
             background: radial-gradient(circle at 50% 50%, #0b1528 0%, #05070C 100%);
+            position: relative;
         }
-        /* تأثير الزجاج */
+        .cyber-bg::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: 
+                linear-gradient(rgba(0, 210, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 210, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: 0;
+        }
         .glass-card {
             background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.08);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            z-index: 10;
         }
         .glass-card:hover {
             background: rgba(255, 255, 255, 0.06);
@@ -36,7 +48,6 @@
             box-shadow: 0 0 25px rgba(0, 210, 255, 0.15);
             transform: translateY(-5px);
         }
-        /* أنيميشن التوهج المخصص */
         @keyframes pulse-glow {
             0%, 100% { opacity: 0.3; transform: scale(1); }
             50% { opacity: 0.6; transform: scale(1.05); }
@@ -44,301 +55,1116 @@
         .glow-orb {
             animation: pulse-glow 8s infinite ease-in-out;
         }
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        .shimmer-text {
+            background: linear-gradient(90deg, #00D2FF 0%, #8A2BE2 25%, #00D2FF 50%, #8A2BE2 75%, #00D2FF 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 4s linear infinite;
+        }
+        @keyframes scan-line {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100vh); }
+        }
+        .scan-line {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00D2FF, transparent);
+            animation: scan-line 8s linear infinite;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.3;
+        }
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            right: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, transparent, #00D2FF, #8A2BE2, transparent);
+            transform: translateX(50%);
+        }
+        .timeline-item {
+            position: relative;
+            width: 50%;
+            padding: 1rem 2.5rem;
+        }
+        .timeline-item:nth-child(odd) {
+            right: 0;
+            text-align: right;
+        }
+        .timeline-item:nth-child(even) {
+            right: 50%;
+            text-align: left;
+        }
+        .timeline-dot {
+            position: absolute;
+            top: 1.5rem;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #05070C;
+            border: 3px solid #00D2FF;
+            box-shadow: 0 0 15px rgba(0, 210, 255, 0.6);
+            z-index: 2;
+        }
+        .timeline-item:nth-child(odd) .timeline-dot {
+            left: -9px;
+        }
+        .timeline-item:nth-child(even) .timeline-dot {
+            right: -9px;
+            border-color: #8A2BE2;
+            box-shadow: 0 0 15px rgba(138, 43, 226, 0.6);
+        }
+        .timeline-dot.completed {
+            background: linear-gradient(135deg, #00D2FF, #8A2BE2);
+        }
+        @media (max-width: 768px) {
+            .timeline::before {
+                right: 20px;
+            }
+            .timeline-item,
+            .timeline-item:nth-child(odd),
+            .timeline-item:nth-child(even) {
+                width: 100%;
+                right: 0;
+                text-align: right;
+                padding-right: 3rem;
+                padding-left: 1rem;
+            }
+            .timeline-item:nth-child(odd) .timeline-dot,
+            .timeline-item:nth-child(even) .timeline-dot {
+                right: 11px;
+                left: auto;
+                border-color: #00D2FF;
+            }
+        }
+        /* Progress bars */
+        .progress-bar {
+            position: relative;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 999px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .progress-fill {
+            height: 100%;
+            border-radius: 999px;
+            background: linear-gradient(90deg, #00D2FF, #8A2BE2);
+            position: relative;
+            overflow: hidden;
+            transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            animation: shimmer 2s linear infinite;
+            background-size: 200% 100%;
+        }
+        /* Featured project */
+        .featured-project {
+            background: linear-gradient(135deg, rgba(0, 210, 255, 0.08), rgba(138, 43, 226, 0.08));
+            border: 1px solid rgba(0, 210, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        .featured-project::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, rgba(0, 210, 255, 0.1), transparent 30%);
+            animation: rotate 10s linear infinite;
+        }
+        @keyframes rotate {
+            100% { transform: rotate(360deg); }
+        }
+        .featured-project > * {
+            position: relative;
+            z-index: 1;
+        }
+        /* Status badges - FIXED */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 12px;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        .status-completed {
+            background: rgba(16, 185, 129, 0.15);
+            color: #10b981;
+            border: 1px solid rgba(16, 185, 129, 0.4);
+        }
+        .status-completed::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #10b981;
+            box-shadow: 0 0 8px #10b981;
+            animation: pulse-glow 2s infinite;
+            flex-shrink: 0;
+        }
+        .status-progress {
+            background: rgba(245, 158, 11, 0.15);
+            color: #f59e0b;
+            border: 1px solid rgba(245, 158, 11, 0.4);
+        }
+        .status-progress::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #f59e0b;
+            box-shadow: 0 0 8px #f59e0b;
+            animation: pulse-glow 2s infinite;
+            flex-shrink: 0;
+        }
+        .status-planned {
+            background: rgba(148, 163, 184, 0.15);
+            color: #94a3b8;
+            border: 1px solid rgba(148, 163, 184, 0.4);
+        }
+        .status-planned::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #94a3b8;
+            flex-shrink: 0;
+        }
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(5, 7, 12, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0, 210, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        .navbar.scrolled {
+            background: rgba(5, 7, 12, 0.95);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #00D2FF, #8A2BE2);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .nav-link:hover {
+            color: #00D2FF;
+        }
+        /* Planned projects - faded */
+        .planned-project {
+            opacity: 0.5;
+            filter: grayscale(0.6);
+            transition: all 0.4s ease;
+        }
+        .planned-project:hover {
+            opacity: 0.8;
+            filter: grayscale(0.3);
+        }
+        /* Mobile menu */
+        .mobile-menu {
+            display: none;
+        }
+        @media (max-width: 768px) {
+            .mobile-menu {
+                display: block;
+            }
+            .desktop-nav {
+                display: none;
+            }
+        }
+        /* University logos */
+        .university-logo {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: contain;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 10px;
+            border: 2px solid;
+        }
+        .kku-logo {
+            border-color: #00A651;
+            box-shadow: 0 0 20px rgba(0, 166, 81, 0.4);
+        }
+        .ub-logo {
+            border-color: #8A2BE2;
+            box-shadow: 0 0 20px rgba(138, 43, 226, 0.4);
+        }
+        /* Video placeholder */
+        .video-placeholder {
+            background: linear-gradient(135deg, rgba(0, 210, 255, 0.1), rgba(138, 43, 226, 0.1));
+            border: 2px dashed rgba(0, 210, 255, 0.3);
+            border-radius: 12px;
+            aspect-ratio: 16/9;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            transition: all 0.3s ease;
+        }
+        .video-placeholder:hover {
+            border-color: rgba(0, 210, 255, 0.6);
+            background: linear-gradient(135deg, rgba(0, 210, 255, 0.15), rgba(138, 43, 226, 0.15));
+        }
+        /* Completed project card */
+        .completed-card {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.05), rgba(0, 210, 255, 0.05));
+            border: 1px solid rgba(16, 185, 129, 0.25);
+            position: relative;
+            overflow: hidden;
+        }
+        .completed-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #10b981, #00D2FF, #8A2BE2);
+        }
     </style>
 </head>
 <body class="text-slate-200 overflow-x-hidden cyber-bg selection:bg-cyan-500 selection:text-slate-900">
 
-    <div class="absolute top-20 left-10 w-96 h-96 bg-cyan-500/10 rounded-full blur-[120px] glow-orb pointer-events-none"></div>
-    <div class="absolute top-[40%] right-10 w-[450px] h-[450px] bg-purple-600/10 rounded-full blur-[150px] glow-orb pointer-events-none" style="animation-delay: 2s;"></div>
-    <div class="absolute bottom-20 left-20 w-80 h-80 bg-blue-600/10 rounded-full blur-[100px] glow-orb pointer-events-none" style="animation-delay: 4s;"></div>
+    <!-- Scan line - Back layer (z-index: 1) -->
+    <div class="scan-line"></div>
+    
+    <!-- Background glow orbs -->
+    <div class="absolute top-20 left-10 w-96 h-96 bg-cyan-500/10 rounded-full blur-[120px] glow-orb pointer-events-none z-0"></div>
+    <div class="absolute top-[40%] right-10 w-[450px] h-[450px] bg-purple-600/10 rounded-full blur-[150px] glow-orb pointer-events-none z-0" style="animation-delay: 2s;"></div>
+    <div class="absolute bottom-20 left-20 w-80 h-80 bg-blue-600/10 rounded-full blur-[100px] glow-orb pointer-events-none z-0" style="animation-delay: 4s;"></div>
 
-    <header class="min-h-screen flex flex-col justify-center items-center relative px-4 text-center">
-        <div class="glass-card p-8 md:p-16 rounded-3xl max-w-4xl border-cyan-500/20 shadow-[0_0_50px_rgba(0,0,0,0.5)]">
-            <h1 class="tech-font text-6xl md:text-8xl font-black tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 mb-2 drop-shadow-[0_0_30px_rgba(0,210,255,0.3)]">
+    <!-- ============ NAVBAR ============ -->
+    <nav class="navbar">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <span class="tech-font text-2xl font-black shimmer-text">R&M</span>
+                <span class="text-xs text-slate-400 hidden sm:inline">CYBER LAB</span>
+            </div>
+            
+            <div class="desktop-nav flex items-center gap-6 text-sm font-medium">
+                <a href="#home" class="nav-link text-slate-300 hover:text-cyan-400">الرئيسية</a>
+                <a href="#about" class="nav-link text-slate-300 hover:text-cyan-400">عن الفريق</a>
+                <a href="#timeline" class="nav-link text-slate-300 hover:text-cyan-400">الرحلة الزمنية</a>
+                <a href="#projects" class="nav-link text-slate-300 hover:text-cyan-400">المشاريع</a>
+                <a href="#skills" class="nav-link text-slate-300 hover:text-cyan-400">المهارات</a>
+            </div>
+
+            <button class="mobile-menu text-slate-300 hover:text-cyan-400" onclick="toggleMobileMenu()">
+                <i class="fa-solid fa-bars text-2xl"></i>
+            </button>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden border-t border-slate-800 bg-slate-950/95">
+            <div class="flex flex-col p-4 gap-3">
+                <a href="#home" class="text-slate-300 hover:text-cyan-400 py-2">الرئيسية</a>
+                <a href="#about" class="text-slate-300 hover:text-cyan-400 py-2">عن الفريق</a>
+                <a href="#timeline" class="text-slate-300 hover:text-cyan-400 py-2">الرحلة الزمنية</a>
+                <a href="#projects" class="text-slate-300 hover:text-cyan-400 py-2">المشاريع</a>
+                <a href="#skills" class="text-slate-300 hover:text-cyan-400 py-2">المهارات</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ============ HEADER ============ -->
+    <header id="home" class="min-h-screen flex flex-col justify-center items-center relative px-4 text-center pt-20">
+        <div class="glass-card p-10 md:p-20 rounded-3xl max-w-5xl w-full border-cyan-500/20 shadow-[0_0_50px_rgba(0,0,0,0.5)]">
+            <div class="inline-block mb-6">
+                <span class="status-badge status-completed">SYSTEM ONLINE</span>
+            </div>
+            
+            <h1 class="tech-font text-7xl md:text-9xl font-black tracking-widest shimmer-text mb-3 drop-shadow-[0_0_30px_rgba(0,210,255,0.3)]">
                 R&M
             </h1>
-            <p class="tech-font text-2xl md:text-3xl font-bold tracking-[0.2em] text-slate-400 mb-6">CYBER LAB</p>
+            <p class="tech-font text-3xl md:text-4xl font-bold tracking-[0.2em] text-slate-400 mb-8">CYBER LAB</p>
             
-            <div class="h-[1px] w-40 bg-gradient-to-r from-transparent via-cyan-400 to-transparent mx-auto mb-6"></div>
+            <div class="h-[1px] w-60 bg-gradient-to-r from-transparent via-cyan-400 to-transparent mx-auto mb-8"></div>
             
-            <h2 class="text-xl md:text-2xl font-semibold text-slate-300 mb-4">مشروع شخصي .. رحلة لا تتوقف</h2>
-            <p class="tech-font text-cyan-400 font-medium tracking-wide text-sm md:text-base bg-cyan-950/40 px-4 py-2 rounded-full border border-cyan-500/30 inline-block mb-8">
+            <h2 class="text-2xl md:text-3xl font-bold text-slate-200 mb-6">مشروع شخصي .. رحلة لا تتوقف</h2>
+            <p class="tech-font text-cyan-400 font-medium tracking-wide text-sm md:text-base bg-cyan-950/40 px-6 py-3 rounded-full border border-cyan-500/30 inline-block mb-10">
                 Building. Breaking. Learning. Securing.
             </p>
 
-            <div class="flex flex-wrap justify-center gap-6 text-sm text-slate-400 font-medium">
-                <span class="hover:text-cyan-400 transition-colors cursor-default"><i class="fa-solid fa-graduation-cap text-cyan-400 ml-1"></i> نتعلم</span>
+            <div class="flex flex-wrap justify-center gap-8 text-base text-slate-300 font-semibold">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-graduation-cap text-cyan-400"></i>
+                    <span class="hover:text-cyan-400 transition-colors">نتعلم</span>
+                </div>
                 <span class="text-slate-600">|</span>
-                <span class="hover:text-cyan-400 transition-colors cursor-default"><i class="fa-solid fa-laptop-code text-cyan-400 ml-1"></i> نطبق</span>
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-laptop-code text-cyan-400"></i>
+                    <span class="hover:text-cyan-400 transition-colors">نطبق</span>
+                </div>
                 <span class="text-slate-600">|</span>
-                <span class="hover:text-cyan-400 transition-colors cursor-default"><i class="fa-solid fa-lightbulb text-cyan-400 ml-1"></i> نبتكر</span>
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-lightbulb text-cyan-400"></i>
+                    <span class="hover:text-cyan-400 transition-colors">نبتكر</span>
+                </div>
                 <span class="text-slate-600">|</span>
-                <span class="hover:text-cyan-400 transition-colors cursor-default"><i class="fa-solid fa-share-nodes text-cyan-400 ml-1"></i> netشارك</span>
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-share-nodes text-cyan-400"></i>
+                    <span class="hover:text-cyan-400 transition-colors">نشارك</span>
+                </div>
             </div>
         </div>
 
-        <a href="#about" class="absolute bottom-10 text-slate-500 hover:text-cyan-400 transition-colors text-2xl animate-bounce">
+        <a href="#collaboration" class="absolute bottom-10 text-slate-500 hover:text-cyan-400 transition-colors text-2xl animate-bounce">
             <i class="fa-solid fa-chevron-down"></i>
         </a>
     </header>
 
-   <section class="max-w-5xl mx-auto px-4 py-12 text-center">
-    <div class="glass-card py-6 px-8 rounded-2xl flex flex-col md:flex-row items-center justify-center gap-4 border-purple-500/20">
-
-        <div class="w-12 h-12 rounded-full bg-gradient-to-tr from-purple-600 to-cyan-400 flex items-center justify-center text-xl shadow-[0_0_15px_rgba(138,43,226,0.4)]">
-            <i class="fa-solid fa-users-gear"></i>
+    <!-- ============ COLLABORATION SECTION ============ -->
+    <section id="collaboration" class="max-w-6xl mx-auto px-4 py-16 text-center relative z-10">
+        <div class="glass-card py-10 px-8 rounded-3xl flex flex-col items-center justify-center gap-8 border-purple-500/20">
+            <div class="w-16 h-16 rounded-full bg-gradient-to-tr from-purple-600 to-cyan-400 flex items-center justify-center text-3xl shadow-[0_0_20px_rgba(138,43,226,0.5)]">
+                <i class="fa-solid fa-handshake"></i>
+            </div>
+            
+            <h3 class="text-2xl font-bold text-slate-200 mb-2">تعاون طلابي متخصص</h3>
+            <p class="text-sm text-slate-400 max-w-2xl">شراكة طلابية تجمع بين الخبرات والمهارات لبناء مشاريع سيبرانية مبتكرة تساهم في تطوير المجتمع التقني وتمهيد الطريق لسوق العمل</p>
+            
+            <div class="flex flex-col md:flex-row items-center justify-center gap-12 w-full mt-6">
+                <!-- King Khalid University -->
+                <div class="flex flex-col items-center gap-4">
+                    <div class="university-logo kku-logo flex items-center justify-center bg-white">
+                        <img src="KKU.png" 
+                             alt="جامعة الملك خالد" 
+                             class="w-full h-full object-contain p-2"
+                             onerror="this.parentElement.innerHTML='<div class=\'text-center\'><i class=\'fa-solid fa-university text-4xl text-[#00A651]\'></i><p class=\'text-[10px] text-[#00A651] font-bold mt-1\'>KKU</p></div>'">
+                    </div>
+                    <div class="text-center">
+                        <p class="text-cyan-400 font-bold text-lg">مشعل الجذمي</p>
+                        <p class="text-sm text-slate-300 mt-2">طالب نظم المعلومات</p>
+                        <p class="text-xs text-slate-400">مسار الأمن السيبراني</p>
+                        <p class="text-xs text-slate-500 mt-1">جامعة الملك خالد - أبها</p>
+                    </div>
+                </div>
+                
+                <div class="hidden md:flex items-center">
+                    <i class="fa-solid fa-plus text-slate-600 text-3xl"></i>
+                </div>
+                
+                <!-- University of Bisha -->
+                <div class="flex flex-col items-center gap-4">
+                    <div class="university-logo ub-logo flex items-center justify-center bg-white">
+                        <img src="Bisha.png" 
+                             alt="جامعة بيشة" 
+                             class="w-full h-full object-contain p-2"
+                             onerror="this.parentElement.innerHTML='<div class=\'text-center\'><i class=\'fa-solid fa-university text-4xl text-[#8A2BE2]\'></i><p class=\'text-[10px] text-[#8A2BE2] font-bold mt-1\'>BU</p></div>'">
+                    </div>
+                    <div class="text-center">
+                        <p class="text-purple-400 font-bold text-lg">ريماس القحطاني</p>
+                        <p class="text-sm text-slate-300 mt-2">طالبة أمن سيبراني</p>
+                        <p class="text-xs text-slate-500 mt-1">جامعة بيشة - بيشة</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-8 pt-6 border-t border-slate-700 max-w-3xl">
+                <p class="text-sm text-slate-300 leading-relaxed">
+                    <i class="fa-solid fa-briefcase text-cyan-400 ml-2"></i>
+                    نحن طلاب نسعى من خلال مشاريعنا العملية إلى بناء خبرات حقيقية تمهد لنا الطريق لسوق العمل في مجال الأمن السيبراني
+                </p>
+            </div>
         </div>
+    </section>
 
-        <p class="text-lg md:text-xl text-slate-300 leading-relaxed max-w-3xl">
-            نحن
-
-            <span class="inline-flex items-center gap-2">
-                <img src="images/KKU.png" alt="King Khalid University"
-                     class="w-6 h-6 object-contain">
-                <span class="text-cyan-400 font-bold">مشعل (M)</span>
-            </span>
-
-            من جامعة الملك خالد في أبها، و
-
-            <span class="inline-flex items-center gap-2">
-                <img src="images/Bisha.png" alt="University of Bisha"
-                     class="w-6 h-6 object-contain">
-                <span class="text-purple-400 font-bold">ريماس (R)</span>
-            </span>
-
-            من جامعة بيشة في بيشة. نجمع بين الشغف والمعرفة لبناء مشاريع سيبرانية حقيقية تصنع فرقاً.
-        </p>
-    </div>
-</section>
-
-    <section id="about" class="max-w-6xl mx-auto px-4 py-16">
+    <!-- ============ ABOUT ============ -->
+    <section id="about" class="max-w-6xl mx-auto px-4 py-16 relative z-10">
         <div class="text-center mb-16">
             <h2 class="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-slate-100 to-slate-400">الملف الأكاديمي والمهني</h2>
             <div class="h-1 w-20 bg-cyan-500 mx-auto mt-3 rounded-full"></div>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Meshal -->
             <div class="glass-card p-8 rounded-3xl relative overflow-hidden group border-blue-600/20">
                 <div class="absolute -top-10 -left-10 text-9xl font-black tech-font text-blue-500/5 group-hover:text-blue-500/10 transition-colors select-none">M</div>
                 
                 <div class="flex flex-col sm:flex-row items-center gap-5 mb-6 relative z-10">
                     <div class="w-24 h-24 rounded-full border-2 border-cyan-400 overflow-hidden shadow-[0_0_20px_rgba(0,210,255,0.4)] bg-slate-900 shrink-0">
-                        <img src="meshal.png" alt="مشعل الجذمي" class="w-full h-full object-cover onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=meshal'">
+                        <img src="meshal.png" alt="مشعل الجذمي" class="w-full h-full object-cover" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=meshal'">
                     </div>
                     <div class="text-center sm:text-right">
                         <span class="text-[11px] font-bold uppercase tracking-wider text-blue-400 bg-blue-950/50 px-3 py-1 rounded-full border border-blue-500/30">جامعة الملك خالد - أبها</span>
                         <h3 class="text-2xl font-bold mt-2 text-slate-100">مشعل الجذمي</h3>
+                        <span class="status-badge status-progress mt-2">طالب - سنة أخيرة</span>
                     </div>
                 </div>
 
                 <p class="text-slate-300 mb-6 leading-relaxed">
-                    خريج تخصص <span class="text-white font-semibold">نظم المعلومات</span> بمسار الأمن السيبراني. مبني على أسس أكاديمية متينة ومدعّم باعتمادات جودة رفيعة المستوى تضمن كفاءة الحلول والممارسات التقنية.
+                    طالب في تخصص <span class="text-white font-semibold">نظم المعلومات</span> بمسار الأمن السيبراني. أطمح لتطوير مهاراتي العملية من خلال المشاريع التطبيقية والاستعداد لسوق العمل في مجال الأمن السيبراني.
                 </p>
                 <div class="space-y-3 pt-4 border-t border-slate-800">
                     <div class="flex items-center gap-3 text-sm text-slate-400">
                         <i class="fa-solid fa-award text-amber-400 text-base"></i>
-                        <span>الاعتماد المحلي الوطني: <strong class="text-slate-200 font-semibold tech-font">NCAAA</strong></span>
+                        <span>الاعتماد المحلي: <strong class="text-slate-200 font-semibold tech-font">NCAAA</strong></span>
                     </div>
                     <div class="flex items-center gap-3 text-sm text-slate-400">
                         <i class="fa-solid fa-ribbon text-cyan-400 text-base"></i>
-                        <span>الاعتماد الدولي الأمريكي: <strong class="text-slate-200 font-semibold tech-font">ABET</strong></span>
+                        <span>الاعتماد الدولي: <strong class="text-slate-200 font-semibold tech-font">ABET</strong></span>
+                    </div>
+                    <div class="flex items-center gap-3 text-sm text-slate-400">
+                        <i class="fa-brands fa-github text-slate-400 text-base"></i>
+                        <a href="https://github.com/ish3-is" target="_blank" class="hover:text-cyan-400 transition-colors">
+                            <strong class="text-slate-200 font-semibold">github.com/ish3-is</strong>
+                        </a>
+                    </div>
+                    <div class="flex items-center gap-3 text-sm text-slate-400">
+                        <i class="fa-brands fa-linkedin text-blue-400 text-base"></i>
+                        <a href="https://www.linkedin.com/in/meshjth" target="_blank" class="hover:text-cyan-400 transition-colors">
+                            <strong class="text-slate-200 font-semibold">linkedin.com/in/meshjth</strong>
+                        </a>
                     </div>
                 </div>
             </div>
 
+            <!-- Remas -->
             <div class="glass-card p-8 rounded-3xl relative overflow-hidden group border-purple-600/20">
                 <div class="absolute -top-10 -left-10 text-9xl font-black tech-font text-purple-500/5 group-hover:text-purple-500/10 transition-colors select-none">R</div>
                 
                 <div class="flex flex-col sm:flex-row items-center gap-5 mb-6 relative z-10">
                     <div class="w-24 h-24 rounded-full border-2 border-purple-400 overflow-hidden shadow-[0_0_20px_rgba(138,43,226,0.4)] bg-slate-900 shrink-0">
-                        <img src="1777444314865.jpg" alt="ريماس القحطاني" class="w-full h-full object-cover onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=reemas'">
+                        <img src="reemas.png" alt="ريماس القحطاني" class="w-full h-full object-cover" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=reemas'">
                     </div>
                     <div class="text-center sm:text-right">
                         <span class="text-[11px] font-bold uppercase tracking-wider text-purple-400 bg-purple-950/50 px-3 py-1 rounded-full border border-purple-500/30">جامعة بيشة - بيشة</span>
                         <h3 class="text-2xl font-bold mt-2 text-slate-100">ريماس القحطاني</h3>
+                        <span class="status-badge status-progress mt-2">طالبة - سنة رابعة</span>
                     </div>
                 </div>
 
                 <p class="text-slate-300 mb-6 leading-relaxed">
-                    طالبة في تخصص <span class="text-white font-semibold">الأمن السيبراني</span> في سنتها الرابعة والأخيرة. شغوفة بالبحث والتحليل واكتشاف الثغرات الرقمية وتطوير استراتيجيات دفاعية ذكية لمواكبة التحديات الحديثة.
+                    طالبة في تخصص <span class="text-white font-semibold">الأمن السيبراني</span> في سنتها الرابعة. شغوفة بالبحث والتحليل واكتشاف الثغرات الرقمية، وأسعى لبناء خبرات عملية تؤهلني لسوق العمل.
                 </p>
                 <div class="space-y-3 pt-4 border-t border-slate-800">
                     <div class="flex items-center gap-3 text-sm text-slate-400">
                         <i class="fa-solid fa-hourglass-half text-purple-400 text-base"></i>
-                        <span>المرحلة الحالية: <strong class="text-slate-200 font-semibold">السنة الرابعة والأخيرة (مقبلة على التخرج)</strong></span>
+                        <span>المرحلة: <strong class="text-slate-200 font-semibold">السنة الرابعة (مقبلة على التخرج)</strong></span>
                     </div>
                     <div class="flex items-center gap-3 text-sm text-slate-400">
                         <i class="fa-solid fa-crosshairs text-rose-400 text-base"></i>
-                        <span>التركيز الأساسي: <strong class="text-slate-200 font-semibold">تطوير وبناء مجتمع سيبراني آمن</strong></span>
+                        <span>الهدف: <strong class="text-slate-200 font-semibold">الاستعداد لسوق العمل السيبراني</strong></span>
+                    </div>
+                    <div class="flex items-center gap-3 text-sm text-slate-400">
+                        <i class="fa-brands fa-github text-slate-400 text-base"></i>
+                        <span class="text-slate-500"><strong>قريباً</strong></span>
+                    </div>
+                    <div class="flex items-center gap-3 text-sm text-slate-400">
+                        <i class="fa-brands fa-linkedin text-purple-400 text-base"></i>
+                        <a href="https://www.linkedin.com/in/remas-alqahtani-1674b33a8/" target="_blank" class="hover:text-purple-400 transition-colors">
+                            <strong class="text-slate-200 font-semibold">linkedin.com/in/remas-alqahtani</strong>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="max-w-6xl mx-auto px-4 py-16">
+    <!-- ============ TIMELINE ============ -->
+    <section id="timeline" class="max-w-6xl mx-auto px-4 py-16 relative z-10">
         <div class="text-center mb-16">
-            <h2 class="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-slate-100 to-slate-400">مشاريعنا قيد التنفيذ</h2>
-            <p class="text-slate-400 text-sm mt-2">بيئة معملية متكاملة لمحاكاة التهديدات وبناء الأنظمة الدفاعية</p>
-            <div class="h-1 w-20 bg-purple-500 mx-auto mt-3 rounded-full"></div>
+            <h2 class="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-slate-100 to-slate-400">الرحلة الزمنية</h2>
+            <p class="text-slate-400 text-sm mt-2">محطاتنا الرئيسية في رحلة R&M Cyber Lab</p>
+            <div class="h-1 w-20 bg-gradient-to-r from-cyan-500 to-purple-500 mx-auto mt-3 rounded-full"></div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div class="glass-card p-6 rounded-2xl flex flex-col justify-between">
-                <div>
-                    <div class="w-12 h-12 rounded-xl bg-cyan-950/60 border border-cyan-500/30 flex items-center justify-center text-cyan-400 text-xl mb-4 shadow-[0_0_15px_rgba(0,210,255,0.1)]">
-                        <i class="fa-solid fa-shield-cat"></i>
+        <div class="timeline">
+            <!-- Item 1 - يناير 2026 -->
+            <div class="timeline-item">
+                <div class="timeline-dot completed"></div>
+                <div class="glass-card p-6 rounded-2xl border-emerald-500/30">
+                    <div class="flex items-center justify-between mb-2 flex-wrap gap-2">
+                        <span class="tech-font text-xs text-emerald-400 font-bold">يناير 2026</span>
+                        <span class="status-badge status-completed">COMPLETED</span>
                     </div>
-                    <h3 class="tech-font text-lg font-bold text-white mb-1">Mini SOC</h3>
-                    <span class="text-xs text-cyan-400 font-medium">نظام كشف التهديدات ومراقبة الأحداث</span>
-                    <p class="text-sm text-slate-400 mt-3 leading-relaxed">بناء مركز عمليات أمنية مصغر يتيح الرؤية الكاملة والتحليل الفوري للأحداث الأمنية داخل بيئة العمل.</p>
+                    <h3 class="text-lg font-bold text-white mb-1">🚀 بداية الرحلة</h3>
+                    <p class="text-sm text-slate-400 leading-relaxed mb-3">تأسيس منظمة مدار وبداية رحلة R&M Cyber Lab</p>
+                    <a href="#" class="inline-flex items-center gap-1 text-xs text-emerald-400 hover:text-emerald-300">
+                        <i class="fa-solid fa-link"></i>
+                        <span>قريباً</span>
+                    </a>
                 </div>
             </div>
 
-            <div class="glass-card p-6 rounded-2xl flex flex-col justify-between">
-                <div>
-                    <div class="w-12 h-12 rounded-xl bg-purple-950/60 border border-purple-500/30 flex items-center justify-center text-purple-400 text-xl mb-4 shadow-[0_0_15px_rgba(138,43,226,0.1)]">
-                        <i class="fa-solid fa-chart-network"></i>
+            <!-- Item 2 - دورة الاختراق الأخلاقي -->
+            <div class="timeline-item">
+                <div class="timeline-dot completed"></div>
+                <div class="glass-card p-6 rounded-2xl border-cyan-500/30">
+                    <div class="flex items-center justify-between mb-2 flex-wrap gap-2">
+                        <span class="tech-font text-xs text-cyan-400 font-bold">فبراير 2026</span>
+                        <span class="status-badge status-completed">COMPLETED</span>
                     </div>
-                    <h3 class="tech-font text-lg font-bold text-white mb-1">Security Monitoring</h3>
-                    <span class="text-xs text-purple-400 font-medium">منصة لمراقبة الأجهزة والشبكات والتنبيهات</span>
-                    <p class="text-sm text-slate-400 mt-3 leading-relaxed">تجميع سجلات الأحداث (Logs) بذكاء من كافة الأنظمة والشبكات وتحليلها لإصدار تنبيهات مبكرة عند أي نشاط مريب.</p>
+                    <h3 class="text-lg font-bold text-white mb-1">🎓 دورة الاختراق الأخلاقي</h3>
+                    <p class="text-sm text-slate-400 leading-relaxed mb-3">إتمام دورة الاختراق الأخلاقي بنجاح</p>
+                    <div class="flex gap-4 text-xs">
+                        <div class="flex items-center gap-1 text-slate-400">
+                            <i class="fa-solid fa-users text-cyan-400"></i>
+                            <span>190 مسجل</span>
+                        </div>
+                        <div class="flex items-center gap-1 text-slate-400">
+                            <i class="fa-solid fa-check-circle text-emerald-400"></i>
+                            <span>135 ناجح</span>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="glass-card p-6 rounded-2xl flex flex-col justify-between">
-                <div>
-                    <div class="w-12 h-12 rounded-xl bg-blue-950/60 border border-blue-500/30 flex items-center justify-center text-blue-400 text-xl mb-4 shadow-[0_0_15px_rgba(30,64,175,0.1)]">
-                        <i class="fa-solid fa-fingerprint"></i>
+            <!-- Item 3 - أبريل 2026 -->
+            <div class="timeline-item">
+                <div class="timeline-dot completed"></div>
+                <div class="glass-card p-6 rounded-2xl border-purple-500/30">
+                    <div class="flex items-center justify-between mb-2 flex-wrap gap-2">
+                        <span class="tech-font text-xs text-purple-400 font-bold">أبريل 2026</span>
+                        <span class="status-badge status-completed">COMPLETED</span>
                     </div>
-                    <h3 class="tech-font text-lg font-bold text-white mb-1">Digital Forensics Lab</h3>
-                    <span class="text-xs text-blue-400 font-medium">مختبر للتحقيق الرقمي وتحليل الأدلة</span>
-                    <p class="text-sm text-slate-400 mt-3 leading-relaxed">فحص وتحليل الآثار الرقمية الناتجة عن الاختراقات، واستخراج الأدلة الجنائية لتوثيق الهجمات وتفادي تكرارها.</p>
+                    <h3 class="text-lg font-bold text-white mb-1">🛡️ Wazuh SOC Lab</h3>
+                    <p class="text-sm text-slate-400 leading-relaxed mb-3">إنشاء مختبر Wazuh SIEM SOC الخاص</p>
+                    <a href="https://github.com/ish3-is/Wazuh-SIEM-SOC-Lab" target="_blank" class="inline-flex items-center gap-1 text-xs text-purple-400 hover:text-purple-300">
+                        <i class="fa-brands fa-github"></i>
+                        <span>عرض المشروع</span>
+                    </a>
                 </div>
             </div>
 
-            <div class="glass-card p-6 rounded-2xl flex flex-col justify-between">
-                <div>
-                    <div class="w-12 h-12 rounded-xl bg-emerald-950/60 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-xl mb-4 shadow-[0_0_15px_rgba(16,185,129,0.1)]">
-                        <i class="fa-solid fa-magnifying-glass-chart"></i>
+            <!-- Item 4 - مايو 2026 -->
+            <div class="timeline-item">
+                <div class="timeline-dot completed"></div>
+                <div class="glass-card p-6 rounded-2xl border-blue-500/30">
+                    <div class="flex items-center justify-between mb-2 flex-wrap gap-2">
+                        <span class="tech-font text-xs text-blue-400 font-bold">مايو 2026</span>
+                        <span class="status-badge status-completed">COMPLETED</span>
                     </div>
-                    <h3 class="tech-font text-lg font-bold text-white mb-1">Behavioral Analysis</h3>
-                    <span class="text-xs text-emerald-400 font-medium">تحليل سلوك المستخدم وكشف الأنشطة الشاذة</span>
-                    <p class="text-sm text-slate-400 mt-3 leading-relaxed">الاعتماد على النمذجة السلوكية للتعرف على السلوكيات غير الاعتيادية التي قد تشير إلى اختراق الحسابات أو تسريب البيانات.</p>
+                    <h3 class="text-lg font-bold text-white mb-1">🔬 انطلاق اللاب المشترك</h3>
+                    <p class="text-sm text-slate-400 leading-relaxed">تخطيط جميع المشاريع المستقبلية وبدء العمل على R&M Cyber Lab</p>
                 </div>
             </div>
 
-            <div class="glass-card p-6 rounded-2xl flex flex-col justify-between">
-                <div>
-                    <div class="w-12 h-12 rounded-xl bg-amber-950/60 border border-amber-500/30 flex items-center justify-center text-amber-400 text-xl mb-4 shadow-[0_0_15px_rgba(245,158,11,0.1)]">
-                        <i class="fa-solid fa-radar"></i>
+            <!-- Item 5 - يونيو 2026 -->
+            <div class="timeline-item">
+                <div class="timeline-dot completed"></div>
+                <div class="glass-card p-6 rounded-2xl border-emerald-500/30">
+                    <div class="flex items-center justify-between mb-2 flex-wrap gap-2">
+                        <span class="tech-font text-xs text-emerald-400 font-bold">يونيو 2026</span>
+                        <span class="status-badge status-completed">COMPLETED</span>
                     </div>
-                    <h3 class="tech-font text-lg font-bold text-white mb-1">Vulnerability Scanner</h3>
-                    <span class="text-xs text-amber-400 font-medium">فحص الثغرات وتقييم المخاطر</span>
-                    <p class="text-sm text-slate-400 mt-3 leading-relaxed">فحص مستمر ومؤتمت للبنية التحتية والشبكات لتقييم الثغرات الأمنية وترتيبها حسب درجة خطورتها قبل استغلالها.</p>
+                    <h3 class="text-lg font-bold text-white mb-1">🎯 المشروع الأول: RM_Sentinel</h3>
+                    <p class="text-sm text-slate-400 leading-relaxed mb-3">إنجاز أول مشروع رسمي: نظام كشف التهديدات المتكامل</p>
+                    <a href="https://github.com/ish3-is/RM_Sentinel" target="_blank" class="inline-flex items-center gap-1 text-xs text-emerald-400 hover:text-emerald-300">
+                        <i class="fa-brands fa-github"></i>
+                        <span>عرض المشروع</span>
+                    </a>
                 </div>
             </div>
 
-            <div class="glass-card p-6 rounded-2xl flex flex-col justify-between">
-                <div>
-                    <div class="w-12 h-12 rounded-xl bg-rose-950/60 border border-rose-500/30 flex items-center justify-center text-rose-400 text-xl mb-4 shadow-[0_0_15px_rgba(244,63,94,0.1)]">
-                        <i class="fa-solid fa-brain"></i>
+            <!-- Item 6 - يوليو 2026 -->
+            <div class="timeline-item">
+                <div class="timeline-dot completed"></div>
+                <div class="glass-card p-6 rounded-2xl border-rose-500/30">
+                    <div class="flex items-center justify-between mb-2 flex-wrap gap-2">
+                        <span class="tech-font text-xs text-rose-400 font-bold">يوليو 2026</span>
+                        <span class="status-badge status-completed">COMPLETED</span>
                     </div>
-                    <h3 class="tech-font text-lg font-bold text-white mb-1">Threat Intelligence</h3>
-                    <span class="text-xs text-rose-400 font-medium">جمع وتحليل معلومات التهديدات السيبرانية</span>
-                    <p class="text-sm text-slate-400 mt-3 leading-relaxed">استباق الهجمات من خلال تتبع وتحليل مصادر التهديد والمؤشرات الحيوية للاختراق (IoCs) لتعزيز الدفاعات مسبقاً.</p>
+                    <h3 class="text-lg font-bold text-white mb-1">🧠 Behavioral Analysis - UEBA</h3>
+                    <p class="text-sm text-slate-400 leading-relaxed mb-3">نظام التحليل السلوكي والمصادقة المستمرة باستخدام الذكاء الاصطناعي</p>
+                    <a href="https://github.com/ish3-is/R-M-UEBA-AI-Engine" target="_blank" class="inline-flex items-center gap-1 text-xs text-rose-400 hover:text-rose-300">
+                        <i class="fa-brands fa-github"></i>
+                        <span>عرض المشروع</span>
+                    </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="max-w-6xl mx-auto px-4 py-16 grid grid-cols-1 lg:grid-cols-12 gap-12">
-        
+    <!-- ============ COMPLETED PROJECTS SECTION ============ -->
+    <section id="projects" class="max-w-6xl mx-auto px-4 py-16 relative z-10">
+        <div class="text-center mb-12">
+            <div class="inline-block mb-3">
+                <span class="status-badge status-completed">MILESTONES ACHIEVED</span>
+            </div>
+            <h2 class="text-3xl md:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500">
+                المشاريع المنجزة
+            </h2>
+            <p class="text-slate-400 text-sm mt-3">إنجازاتنا الرسمية في رحلة R&M Cyber Lab</p>
+            <div class="h-1 w-32 bg-gradient-to-r from-cyan-500 to-purple-500 mx-auto mt-3 rounded-full"></div>
+        </div>
+
+        <div class="space-y-8">
+            <!-- RM_Sentinel - Wide Card -->
+            <div class="completed-card p-6 md:p-8 rounded-3xl">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+                    <div class="lg:col-span-2">
+                        <div class="flex items-start justify-between mb-4 flex-wrap gap-3">
+                            <div class="flex items-center gap-3">
+                                <div class="w-14 h-14 rounded-xl bg-emerald-950/60 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-2xl shadow-[0_0_15px_rgba(16,185,129,0.2)]">
+                                    <i class="fa-solid fa-shield-halved"></i>
+                                </div>
+                                <div>
+                                    <h3 class="tech-font text-2xl md:text-3xl font-black text-white">RM_Sentinel</h3>
+                                    <span class="text-xs text-emerald-400 font-medium">نظام كشف التهديدات المتكامل</span>
+                                </div>
+                            </div>
+                            <span class="status-badge status-completed">COMPLETED</span>
+                        </div>
+                        <p class="text-slate-300 text-base leading-relaxed mb-5">
+                            نظام مراقبة وكشف التهديدات السيبرانية المتكامل، يُمثّل النواة الأولى لمعملنا السيبراني. يجمع بين تقنيات المراقبة الذكية، تحليل السجلات، والاستجابة التلقائية للحوادث في بيئة واحدة متكاملة.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-5">
+                            <span class="text-xs px-3 py-1 rounded-full bg-cyan-950/50 text-cyan-300 border border-cyan-500/30">Wazuh</span>
+                            <span class="text-xs px-3 py-1 rounded-full bg-purple-950/50 text-purple-300 border border-purple-500/30">Elastic Stack</span>
+                            <span class="text-xs px-3 py-1 rounded-full bg-blue-950/50 text-blue-300 border border-blue-500/30">Docker</span>
+                            <span class="text-xs px-3 py-1 rounded-full bg-emerald-950/50 text-emerald-300 border border-emerald-500/30">Linux</span>
+                            <span class="text-xs px-3 py-1 rounded-full bg-amber-950/50 text-amber-300 border border-amber-500/30">Python</span>
+                        </div>
+                        <div class="flex flex-wrap gap-3 mb-5">
+                            <a href="https://github.com/ish3-is/RM_Sentinel" target="_blank" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold text-sm hover:shadow-[0_0_25px_rgba(0,210,255,0.5)] transition-all">
+                                <i class="fa-brands fa-github"></i> عرض على GitHub
+                            </a>
+                            <a href="https://github.com/ish3-is/RM_Sentinel" target="_blank" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-slate-600 text-slate-300 font-bold text-sm hover:border-cyan-400 hover:text-cyan-400 transition-all">
+                                <i class="fa-solid fa-book-open"></i> التوثيق
+                            </a>
+                        </div>
+                        <div class="pt-4 border-t border-slate-700/50">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-xs text-slate-400">تاريخ الإنجاز</span>
+                                <span class="tech-font text-xs text-cyan-400 font-bold">يونيو 2026</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 100%"></div>
+                            </div>
+                            <p class="text-xs text-slate-500 mt-1 text-left">100% مكتمل</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-center">
+                        <div class="video-placeholder w-full">
+                            <i class="fa-solid fa-circle-play text-5xl text-slate-600"></i>
+                            <span class="text-sm text-slate-500">Demo Video</span>
+                            <span class="text-xs text-slate-600">قريباً</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- UEBA Project - Wide Card -->
+            <div class="completed-card p-6 md:p-8 rounded-3xl" style="border-color: rgba(244, 63, 94, 0.25); background: linear-gradient(135deg, rgba(244, 63, 94, 0.05), rgba(138, 43, 226, 0.05));">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+                    <div class="lg:col-span-2">
+                        <div class="flex items-start justify-between mb-4 flex-wrap gap-3">
+                            <div class="flex items-center gap-3">
+                                <div class="w-14 h-14 rounded-xl bg-rose-950/60 border border-rose-500/30 flex items-center justify-center text-rose-400 text-2xl shadow-[0_0_15px_rgba(244,63,94,0.2)]">
+                                    <i class="fa-solid fa-fingerprint"></i>
+                                </div>
+                                <div>
+                                    <h3 class="tech-font text-2xl md:text-3xl font-black text-white">R-M-UEBA-AI-Engine</h3>
+                                    <span class="text-xs text-rose-400 font-medium">Continuous Authentication - Keystroke Dynamics</span>
+                                </div>
+                            </div>
+                            <span class="status-badge status-completed">COMPLETED</span>
+                        </div>
+                        <p class="text-slate-300 text-base leading-relaxed mb-5">
+                            نظام UEBA متقدم للمصادقة المستمرة باستخدام تحليل ديناميكيات الكتابة. يعتمد على الذكاء الاصطناعي (Random Forest) لتحقيق دقة تتجاوز 95% في التحقق من هوية المستخدم بشكل مستمر، مع تكامل كامل مع Splunk SIEM.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-5">
+                            <span class="text-xs px-3 py-1 rounded-full bg-rose-950/50 text-rose-300 border border-rose-500/30">Python</span>
+                            <span class="text-xs px-3 py-1 rounded-full bg-emerald-950/50 text-emerald-300 border border-emerald-500/30">Random Forest</span>
+                            <span class="text-xs px-3 py-1 rounded-full bg-blue-950/50 text-blue-300 border border-blue-500/30">Streamlit</span>
+                            <span class="text-xs px-3 py-1 rounded-full bg-amber-950/50 text-amber-300 border border-amber-500/30">Zero Trust</span>
+                            <span class="text-xs px-3 py-1 rounded-full bg-purple-950/50 text-purple-300 border border-purple-500/30">Splunk</span>
+                            <span class="text-xs px-3 py-1 rounded-full bg-cyan-950/50 text-cyan-300 border border-cyan-500/30">Windows Agent</span>
+                        </div>
+                        <div class="flex flex-wrap gap-3 mb-5">
+                            <a href="https://github.com/ish3-is/R-M-UEBA-AI-Engine" target="_blank" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-rose-500 to-purple-600 text-white font-bold text-sm hover:shadow-[0_0_25px_rgba(244,63,94,0.5)] transition-all">
+                                <i class="fa-brands fa-github"></i> عرض على GitHub
+                            </a>
+                            <a href="https://github.com/ish3-is/R-M-UEBA-AI-Engine" target="_blank" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-slate-600 text-slate-300 font-bold text-sm hover:border-rose-400 hover:text-rose-400 transition-all">
+                                <i class="fa-solid fa-book-open"></i> التوثيق
+                            </a>
+                        </div>
+                        <div class="pt-4 border-t border-slate-700/50">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-xs text-slate-400">تاريخ الإنجاز</span>
+                                <span class="tech-font text-xs text-rose-400 font-bold">يوليو 2026</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 100%"></div>
+                            </div>
+                            <p class="text-xs text-slate-500 mt-1 text-left">100% مكتمل</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-center">
+                        <div class="video-placeholder w-full" style="border-color: rgba(244, 63, 94, 0.3); background: linear-gradient(135deg, rgba(244, 63, 94, 0.1), rgba(138, 43, 226, 0.1));">
+                            <i class="fa-solid fa-circle-play text-5xl text-slate-600"></i>
+                            <span class="text-sm text-slate-500">Demo Video</span>
+                            <span class="text-xs text-slate-600">قريباً</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- In Progress & Planned Projects -->
+        <div class="mt-16">
+            <div class="text-center mb-10">
+                <div class="inline-block mb-3">
+                    <span class="status-badge status-progress">IN PROGRESS</span>
+                </div>
+                <h2 class="text-2xl md:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500">
+                    مشاريع قيد التنفيذ
+                </h2>
+                <div class="h-1 w-20 bg-gradient-to-r from-amber-500 to-orange-500 mx-auto mt-3 rounded-full"></div>
+            </div>
+
+            <div class="space-y-6">
+                <div class="glass-card p-6 rounded-2xl border-cyan-500/30 relative overflow-hidden">
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <div class="lg:col-span-2">
+                            <div class="flex items-start justify-between mb-3 flex-wrap gap-3">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-12 h-12 rounded-xl bg-cyan-950/60 border border-cyan-500/30 flex items-center justify-center text-cyan-400 text-xl">
+                                        <i class="fa-solid fa-shield-cat"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="tech-font text-xl font-bold text-white">Mini SOC</h3>
+                                        <span class="text-xs text-cyan-400 font-medium">نظام كشف التهديدات ومراقبة الأحداث</span>
+                                    </div>
+                                </div>
+                                <span class="status-badge status-progress">IN PROGRESS</span>
+                            </div>
+                            <p class="text-sm text-slate-400 leading-relaxed mb-4">
+                                بناء مركز عمليات أمنية مصغر يتيح الرؤية الكاملة والتحليل الفوري للأحداث الأمنية.
+                            </p>
+                            <div class="progress-bar mb-2">
+                                <div class="progress-fill" style="width: 65%"></div>
+                            </div>
+                            <p class="text-xs text-slate-500">65% مكتمل</p>
+                        </div>
+                        <div class="flex items-center justify-center">
+                            <div class="video-placeholder w-full">
+                                <i class="fa-solid fa-circle-play text-5xl text-slate-600"></i>
+                                <span class="text-sm text-slate-500">Coming Soon</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card p-6 rounded-2xl border-purple-500/30 relative overflow-hidden">
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <div class="lg:col-span-2">
+                            <div class="flex items-start justify-between mb-3 flex-wrap gap-3">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-12 h-12 rounded-xl bg-purple-950/60 border border-purple-500/30 flex items-center justify-center text-purple-400 text-xl">
+                                        <i class="fa-solid fa-chart-line"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="tech-font text-xl font-bold text-white">Security Monitoring</h3>
+                                        <span class="text-xs text-purple-400 font-medium">منصة مراقبة الأجهزة والشبكات</span>
+                                    </div>
+                                </div>
+                                <span class="status-badge status-progress">IN PROGRESS</span>
+                            </div>
+                            <p class="text-sm text-slate-400 leading-relaxed mb-4">
+                                تجميع سجلات الأحداث بذكاء من كافة الأنظمة وتحليلها لإصدار تنبيهات مبكرة.
+                            </p>
+                            <div class="progress-bar mb-2">
+                                <div class="progress-fill" style="width: 50%"></div>
+                            </div>
+                            <p class="text-xs text-slate-500">50% مكتمل</p>
+                        </div>
+                        <div class="flex items-center justify-center">
+                            <div class="video-placeholder w-full">
+                                <i class="fa-solid fa-circle-play text-5xl text-slate-600"></i>
+                                <span class="text-sm text-slate-500">Coming Soon</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Planned Projects -->
+        <div class="mt-16">
+            <div class="text-center mb-10">
+                <div class="inline-block mb-3">
+                    <span class="status-badge status-planned">PLANNED</span>
+                </div>
+                <h2 class="text-2xl md:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-slate-300 to-slate-500">
+                    مشاريع مخططة
+                </h2>
+                <div class="h-1 w-20 bg-gradient-to-r from-slate-400 to-slate-600 mx-auto mt-3 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="glass-card p-6 rounded-2xl planned-project border-slate-600/30 relative overflow-hidden">
+                    <div class="flex items-start justify-between mb-3 flex-wrap gap-3">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 rounded-xl bg-slate-800/60 border border-slate-600/30 flex items-center justify-center text-slate-400 text-xl">
+                                <i class="fa-solid fa-fingerprint"></i>
+                            </div>
+                            <div>
+                                <h3 class="tech-font text-lg font-bold text-slate-300">Digital Forensics Lab</h3>
+                                <span class="text-xs text-slate-500 font-medium">مختبر التحقيق الرقمي</span>
+                            </div>
+                        </div>
+                        <span class="status-badge status-planned">PLANNED</span>
+                    </div>
+                    <p class="text-sm text-slate-500 leading-relaxed mb-4">
+                        فحص وتحليل الآثار الرقمية الناتجة عن الاختراقات واستخراج الأدلة الجنائية.
+                    </p>
+                    <div class="progress-bar mb-2">
+                        <div class="progress-fill" style="width: 10%"></div>
+                    </div>
+                    <p class="text-xs text-slate-600">10% مكتمل</p>
+                </div>
+
+                <div class="glass-card p-6 rounded-2xl planned-project border-slate-600/30 relative overflow-hidden">
+                    <div class="flex items-start justify-between mb-3 flex-wrap gap-3">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 rounded-xl bg-slate-800/60 border border-slate-600/30 flex items-center justify-center text-slate-400 text-xl">
+                                <i class="fa-solid fa-radar"></i>
+                            </div>
+                            <div>
+                                <h3 class="tech-font text-lg font-bold text-slate-300">Vulnerability Scanner</h3>
+                                <span class="text-xs text-slate-500 font-medium">فحص الثغرات وتقييم المخاطر</span>
+                            </div>
+                        </div>
+                        <span class="status-badge status-planned">PLANNED</span>
+                    </div>
+                    <p class="text-sm text-slate-500 leading-relaxed mb-4">
+                        فحص مستمر ومؤتمت للبنية التحتية لتقييم الثغرات الأمنية قبل استغلالها.
+                    </p>
+                    <div class="progress-bar mb-2">
+                        <div class="progress-fill" style="width: 5%"></div>
+                    </div>
+                    <p class="text-xs text-slate-600">5% مكتمل</p>
+                </div>
+
+                <div class="glass-card p-6 rounded-2xl planned-project border-slate-600/30 relative overflow-hidden">
+                    <div class="flex items-start justify-between mb-3 flex-wrap gap-3">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 rounded-xl bg-slate-800/60 border border-slate-600/30 flex items-center justify-center text-slate-400 text-xl">
+                                <i class="fa-solid fa-brain"></i>
+                            </div>
+                            <div>
+                                <h3 class="tech-font text-lg font-bold text-slate-300">Threat Intelligence</h3>
+                                <span class="text-xs text-slate-500 font-medium">استخبارات التهديدات</span>
+                            </div>
+                        </div>
+                        <span class="status-badge status-planned">PLANNED</span>
+                    </div>
+                    <p class="text-sm text-slate-500 leading-relaxed mb-4">
+                        جمع وتحليل معلومات التهديدات السيبرانية من مصادر متعددة.
+                    </p>
+                    <div class="progress-bar mb-2">
+                        <div class="progress-fill" style="width: 0%"></div>
+                    </div>
+                    <p class="text-xs text-slate-600">0% مكتمل</p>
+                </div>
+
+                <div class="glass-card p-6 rounded-2xl planned-project border-slate-600/30 relative overflow-hidden">
+                    <div class="flex items-start justify-between mb-3 flex-wrap gap-3">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 rounded-xl bg-slate-800/60 border border-slate-600/30 flex items-center justify-center text-slate-400 text-xl">
+                                <i class="fa-solid fa-robot"></i>
+                            </div>
+                            <div>
+                                <h3 class="tech-font text-lg font-bold text-slate-300">Automated Response</h3>
+                                <span class="text-xs text-slate-500 font-medium">الاستجابة الآلية للحوادث</span>
+                            </div>
+                        </div>
+                        <span class="status-badge status-planned">PLANNED</span>
+                    </div>
+                    <p class="text-sm text-slate-500 leading-relaxed mb-4">
+                        نظام آلي للاستجابة الفورية للحوادث الأمنية دون تدخل بشري.
+                    </p>
+                    <div class="progress-bar mb-2">
+                        <div class="progress-fill" style="width: 0%"></div>
+                    </div>
+                    <p class="text-xs text-slate-600">0% مكتمل</p>
+                </div>
+
+                <div class="glass-card p-6 rounded-2xl planned-project border-slate-600/30 relative overflow-hidden">
+                    <div class="flex items-start justify-between mb-3 flex-wrap gap-3">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 rounded-xl bg-slate-800/60 border border-slate-600/30 flex items-center justify-center text-slate-400 text-xl">
+                                <i class="fa-solid fa-cloud"></i>
+                            </div>
+                            <div>
+                                <h3 class="tech-font text-lg font-bold text-slate-300">Cloud Security Lab</h3>
+                                <span class="text-xs text-slate-500 font-medium">مختبر أمن السحابة</span>
+                            </div>
+                        </div>
+                        <span class="status-badge status-planned">PLANNED</span>
+                    </div>
+                    <p class="text-sm text-slate-500 leading-relaxed mb-4">
+                        مختبر متخصص في اختبار وتأمين البيئات السحابية.
+                    </p>
+                    <div class="progress-bar mb-2">
+                        <div class="progress-fill" style="width: 0%"></div>
+                    </div>
+                    <p class="text-xs text-slate-600">0% مكتمل</p>
+                </div>
+
+                <div class="glass-card p-6 rounded-2xl planned-project border-slate-600/30 relative overflow-hidden">
+                    <div class="flex items-start justify-between mb-3 flex-wrap gap-3">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 rounded-xl bg-slate-800/60 border border-slate-600/30 flex items-center justify-center text-slate-400 text-xl">
+                                <i class="fa-solid fa-network-wired"></i>
+                            </div>
+                            <div>
+                                <h3 class="tech-font text-lg font-bold text-slate-300">Network Pentest</h3>
+                                <span class="text-xs text-slate-500 font-medium">اختبار اختراق الشبكات</span>
+                            </div>
+                        </div>
+                        <span class="status-badge status-planned">PLANNED</span>
+                    </div>
+                    <p class="text-sm text-slate-500 leading-relaxed mb-4">
+                        إجراء اختبارات اختراق شاملة للبنية التحتية الشبكية.
+                    </p>
+                    <div class="progress-bar mb-2">
+                        <div class="progress-fill" style="width: 0%"></div>
+                    </div>
+                    <p class="text-xs text-slate-600">0% مكتمل</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ SKILLS & TOOLS ============ -->
+    <section id="skills" class="max-w-6xl mx-auto px-4 py-16 grid grid-cols-1 lg:grid-cols-12 gap-12 relative z-10">
         <div class="lg:col-span-7">
             <h2 class="text-2xl font-black text-white mb-8 flex items-center gap-3">
                 <span class="w-2 h-6 bg-cyan-400 rounded-full"></span> المهارات التي نطورها
             </h2>
             <div class="space-y-5 glass-card p-6 rounded-3xl">
                 <div>
-                    <div class="flex justify-between text-sm mb-1">
+                    <div class="flex justify-between text-sm mb-2">
                         <span class="text-slate-300 font-medium"><i class="fa-solid fa-shield-halved text-cyan-400 ml-1"></i> الأمن السيبراني</span>
                         <span class="tech-font text-cyan-400 font-bold">90%</span>
                     </div>
-                    <div class="w-full bg-slate-900 h-2 rounded-full overflow-hidden border border-white/5">
-                        <div class="bg-gradient-to-r from-blue-500 to-cyan-400 h-full rounded-full" style="width: 90%"></div>
-                    </div>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 90%"></div></div>
                 </div>
                 <div>
-                    <div class="flex justify-between text-sm mb-1">
+                    <div class="flex justify-between text-sm mb-2">
                         <span class="text-slate-300 font-medium"><i class="fa-solid fa-network-wired text-cyan-400 ml-1"></i> أمن الشبكات</span>
                         <span class="tech-font text-cyan-400 font-bold">85%</span>
                     </div>
-                    <div class="w-full bg-slate-900 h-2 rounded-full overflow-hidden border border-white/5">
-                        <div class="bg-gradient-to-r from-blue-500 to-cyan-400 h-full rounded-full" style="width: 85%"></div>
-                    </div>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 85%"></div></div>
                 </div>
                 <div>
-                    <div class="flex justify-between text-sm mb-1">
+                    <div class="flex justify-between text-sm mb-2">
                         <span class="text-slate-300 font-medium"><i class="fa-brands fa-linux text-cyan-400 ml-1"></i> لينكس</span>
                         <span class="tech-font text-cyan-400 font-bold">90%</span>
                     </div>
-                    <div class="w-full bg-slate-900 h-2 rounded-full overflow-hidden border border-white/5">
-                        <div class="bg-gradient-to-r from-blue-500 to-cyan-400 h-full rounded-full" style="width: 90%"></div>
-                    </div>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 90%"></div></div>
                 </div>
                 <div>
-                    <div class="flex justify-between text-sm mb-1">
+                    <div class="flex justify-between text-sm mb-2">
                         <span class="text-slate-300 font-medium"><i class="fa-brands fa-python text-cyan-400 ml-1"></i> بايثون</span>
                         <span class="tech-font text-cyan-400 font-bold">88%</span>
                     </div>
-                    <div class="w-full bg-slate-900 h-2 rounded-full overflow-hidden border border-white/5">
-                        <div class="bg-gradient-to-r from-blue-500 to-cyan-400 h-full rounded-full" style="width: 88%"></div>
-                    </div>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 88%"></div></div>
                 </div>
                 <div>
-                    <div class="flex justify-between text-sm mb-1">
+                    <div class="flex justify-between text-sm mb-2">
                         <span class="text-slate-300 font-medium"><i class="fa-solid fa-eye text-cyan-400 ml-1"></i> SOC Operations</span>
                         <span class="tech-font text-cyan-400 font-bold">80%</span>
                     </div>
-                    <div class="w-full bg-slate-900 h-2 rounded-full overflow-hidden border border-white/5">
-                        <div class="bg-gradient-to-r from-blue-500 to-cyan-400 h-full rounded-full" style="width: 80%"></div>
-                    </div>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 80%"></div></div>
                 </div>
                 <div>
-                    <div class="flex justify-between text-sm mb-1">
+                    <div class="flex justify-between text-sm mb-2">
                         <span class="text-slate-300 font-medium"><i class="fa-solid fa-vial-virus text-cyan-400 ml-1"></i> تحليل التهديدات</span>
                         <span class="tech-font text-cyan-400 font-bold">80%</span>
                     </div>
-                    <div class="w-full bg-slate-900 h-2 rounded-full overflow-hidden border border-white/5">
-                        <div class="bg-gradient-to-r from-blue-500 to-cyan-400 h-full rounded-full" style="width: 80%"></div>
-                    </div>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 80%"></div></div>
                 </div>
                 <div>
-                    <div class="flex justify-between text-sm mb-1">
+                    <div class="flex justify-between text-sm mb-2">
                         <span class="text-slate-300 font-medium"><i class="fa-solid fa-kit-medical text-cyan-400 ml-1"></i> الاستجابة للحوادث</span>
                         <span class="tech-font text-cyan-400 font-bold">75%</span>
                     </div>
-                    <div class="w-full bg-slate-900 h-2 rounded-full overflow-hidden border border-white/5">
-                        <div class="bg-gradient-to-r from-blue-500 to-cyan-400 h-full rounded-full" style="width: 75%"></div>
-                    </div>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 75%"></div></div>
                 </div>
                 <div>
-                    <div class="flex justify-between text-sm mb-1">
+                    <div class="flex justify-between text-sm mb-2">
                         <span class="text-slate-300 font-medium"><i class="fa-solid fa-database text-cyan-400 ml-1"></i> قواعد البيانات (SQL)</span>
                         <span class="tech-font text-cyan-400 font-bold">70%</span>
                     </div>
-                    <div class="w-full bg-slate-900 h-2 rounded-full overflow-hidden border border-white/5">
-                        <div class="bg-gradient-to-r from-blue-500 to-cyan-400 h-full rounded-full" style="width: 70%"></div>
-                    </div>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 70%"></div></div>
                 </div>
                 <div>
-                    <div class="flex justify-between text-sm mb-1">
+                    <div class="flex justify-between text-sm mb-2">
                         <span class="text-slate-300 font-medium"><i class="fa-solid fa-code text-cyan-400 ml-1"></i> البرمجة والأتمتة</span>
                         <span class="tech-font text-cyan-400 font-bold">85%</span>
                     </div>
-                    <div class="w-full bg-slate-900 h-2 rounded-full overflow-hidden border border-white/5">
-                        <div class="bg-gradient-to-r from-blue-500 to-cyan-400 h-full rounded-full" style="width: 85%"></div>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 85%"></div></div>
+                </div>
+                <div>
+                    <div class="flex justify-between text-sm mb-2">
+                        <span class="text-slate-300 font-medium"><i class="fa-solid fa-bug text-cyan-400 ml-1"></i> اختبار الاختراق</span>
+                        <span class="tech-font text-cyan-400 font-bold">82%</span>
                     </div>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 82%"></div></div>
+                </div>
+                <div>
+                    <div class="flex justify-between text-sm mb-2">
+                        <span class="text-slate-300 font-medium"><i class="fa-solid fa-lock text-cyan-400 ml-1"></i> التشفير</span>
+                        <span class="tech-font text-cyan-400 font-bold">75%</span>
+                    </div>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 75%"></div></div>
+                </div>
+                <div>
+                    <div class="flex justify-between text-sm mb-2">
+                        <span class="text-slate-300 font-medium"><i class="fa-solid fa-cloud text-cyan-400 ml-1"></i> أمن السحابة</span>
+                        <span class="tech-font text-cyan-400 font-bold">70%</span>
+                    </div>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 70%"></div></div>
                 </div>
             </div>
         </div>
@@ -385,27 +1211,51 @@
                         <i class="fa-solid fa-code text-3xl text-sky-500 transition-transform group-hover:scale-110"></i>
                         <span class="text-xs font-semibold tracking-wide tech-font">VS Code</span>
                     </div>
-                    <div class="glass-card p-4 rounded-xl flex flex-col items-center justify-center gap-2 text-center group col-span-2 sm:col-span-1">
+                    <div class="glass-card p-4 rounded-xl flex flex-col items-center justify-center gap-2 text-center group">
                         <i class="fa-solid fa-database text-3xl text-blue-500 transition-transform group-hover:scale-110"></i>
                         <span class="text-xs font-semibold tracking-wide tech-font">PostgreSQL</span>
+                    </div>
+                    <div class="glass-card p-4 rounded-xl flex flex-col items-center justify-center gap-2 text-center group">
+                        <i class="fa-brands fa-aws text-3xl text-orange-500 transition-transform group-hover:scale-110"></i>
+                        <span class="text-xs font-semibold tracking-wide tech-font">AWS</span>
+                    </div>
+                    <div class="glass-card p-4 rounded-xl flex flex-col items-center justify-center gap-2 text-center group">
+                        <i class="fa-brands fa-git-alt text-3xl text-red-600 transition-transform group-hover:scale-110"></i>
+                        <span class="text-xs font-semibold tracking-wide tech-font">Git</span>
+                    </div>
+                    <div class="glass-card p-4 rounded-xl flex flex-col items-center justify-center gap-2 text-center group">
+                        <i class="fa-solid fa-file-code text-3xl text-yellow-600 transition-transform group-hover:scale-110"></i>
+                        <span class="text-xs font-semibold tracking-wide tech-font">Bash</span>
+                    </div>
+                    <div class="glass-card p-4 rounded-xl flex flex-col items-center justify-center gap-2 text-center group">
+                        <i class="fa-solid fa-bug text-3xl text-green-500 transition-transform group-hover:scale-110"></i>
+                        <span class="text-xs font-semibold tracking-wide tech-font">Burp Suite</span>
+                    </div>
+                    <div class="glass-card p-4 rounded-xl flex flex-col items-center justify-center gap-2 text-center group">
+                        <i class="fa-solid fa-crosshairs text-3xl text-purple-500 transition-transform group-hover:scale-110"></i>
+                        <span class="text-xs font-semibold tracking-wide tech-font">Metasploit</span>
+                    </div>
+                    <div class="glass-card p-4 rounded-xl flex flex-col items-center justify-center gap-2 text-center group">
+                        <i class="fa-solid fa-eye text-3xl text-cyan-500 transition-transform group-hover:scale-110"></i>
+                        <span class="text-xs font-semibold tracking-wide tech-font">Splunk</span>
                     </div>
                 </div>
             </div>
 
-            <div class="glass-card p-6 rounded-2xl border-cyan-500/10 mt-6 lg:mt-0">
+            <div class="glass-card p-6 rounded-2xl border-cyan-500/10 mt-6 lg:mt-8">
                 <h4 class="text-sm font-bold text-cyan-400 mb-3"><i class="fa-solid fa-bullseye ml-1"></i> أهدافنا الاستراتيجية</h4>
                 <ul class="text-xs text-slate-400 space-y-2 leading-relaxed">
-                    <li>• <strong class="text-slate-300">تطوير المهارات:</strong> صقل الخبرات في الأمن السيبراني والتحليل بشكل مستمر وعملي.</li>
-                    <li>• <strong class="text-slate-300">بناء حلول ذكية:</strong> تطوير أدوات برمجية حقيقية تواكب وتفكك أعقد التحديات الواقعية.</li>
-                    <li>• <strong class="text-slate-300">نشر المعرفة:</strong> المساهمة الفعّالة والإيجابية لبناء مجتمع تقني عربي آمن ومستدام.</li>
+                    <li>• <strong class="text-slate-300">تطوير المهارات:</strong> صقل الخبرات في الأمن السيبراني والتحليل بشكل مستمر.</li>
+                    <li>• <strong class="text-slate-300">بناء حلول ذكية:</strong> تطوير أدوات برمجية حقيقية تواكب أعقد التحديات.</li>
+                    <li>• <strong class="text-slate-300">الاستعداد لسوق العمل:</strong> بناء مشاريع عملية تؤهلنا لفرص وظيفية في المجال.</li>
                 </ul>
             </div>
         </div>
     </section>
 
-    <section class="max-w-6xl mx-auto px-4 py-16">
+    <!-- ============ METHODOLOGY ============ -->
+    <section class="max-w-6xl mx-auto px-4 py-16 relative z-10">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            
             <div>
                 <h2 class="text-2xl font-black text-white mb-8 flex items-center gap-3">
                     <span class="w-2 h-6 bg-blue-500 rounded-full"></span> منهجيتنا في العمل
@@ -415,35 +1265,35 @@
                         <span class="tech-font font-black text-xl text-cyan-400 bg-cyan-950/50 w-10 h-10 rounded-lg flex items-center justify-center border border-cyan-500/20">01</span>
                         <div>
                             <h4 class="font-bold text-sm text-slate-200">التخطيط</h4>
-                            <p class="text-xs text-slate-400 mt-0.5">تحديد المشكلة الأمنية بدقة تامة ورسم الهدف الفعلي للمشروع.</p>
+                            <p class="text-xs text-slate-400 mt-0.5">تحديد المشكلة الأمنية بدقة ورسم الهدف الفعلي للمشروع.</p>
                         </div>
                     </div>
                     <div class="glass-card p-4 rounded-xl flex gap-4 items-center">
                         <span class="tech-font font-black text-xl text-purple-400 bg-purple-950/50 w-10 h-10 rounded-lg flex items-center justify-center border border-purple-500/20">02</span>
                         <div>
                             <h4 class="font-bold text-sm text-slate-200">البحث والتجميع</h4>
-                            <p class="text-xs text-slate-400 mt-0.5">جمع كافة البيانات والمعلومات اللازمة وتحليل المتطلبات الفنية بعناية.</p>
+                            <p class="text-xs text-slate-400 mt-0.5">جمع البيانات وتحليل المتطلبات الفنية بعناية.</p>
                         </div>
                     </div>
                     <div class="glass-card p-4 rounded-xl flex gap-4 items-center">
                         <span class="tech-font font-black text-xl text-blue-400 bg-blue-950/50 w-10 h-10 rounded-lg flex items-center justify-center border border-blue-500/20">03</span>
                         <div>
                             <h4 class="font-bold text-sm text-slate-200">البناء</h4>
-                            <p class="text-xs text-slate-400 mt-0.5">كتابة الأكواد البرمجية المتينة وبناء الحلول الرقمية والدفاعية الهيكلية.</p>
+                            <p class="text-xs text-slate-400 mt-0.5">كتابة الأكواد وبناء الحلول الرقمية والدفاعية.</p>
                         </div>
                     </div>
                     <div class="glass-card p-4 rounded-xl flex gap-4 items-center">
                         <span class="tech-font font-black text-xl text-emerald-400 bg-emerald-950/50 w-10 h-10 rounded-lg flex items-center justify-center border border-emerald-500/20">04</span>
                         <div>
                             <h4 class="font-bold text-sm text-slate-200">الاختبار</h4>
-                            <p class="text-xs text-slate-400 mt-0.5">فحص الأنظمة وعمليات الاختراق التجريبي وتحليل النتائج للتأكد من سلامتها.</p>
+                            <p class="text-xs text-slate-400 mt-0.5">فحص الأنظمة والاختراق التجريبي لتحليل النتائج.</p>
                         </div>
                     </div>
                     <div class="glass-card p-4 rounded-xl flex gap-4 items-center">
                         <span class="tech-font font-black text-xl text-amber-400 bg-amber-950/50 w-10 h-10 rounded-lg flex items-center justify-center border border-amber-500/20">05</span>
                         <div>
                             <h4 class="font-bold text-sm text-slate-200">التحسين</h4>
-                            <p class="text-xs text-slate-400 mt-0.5">تطوير الأداء باستمرار وسد أي ثغرات متبقية لضمان أعلى مستويات الأمان.</p>
+                            <p class="text-xs text-slate-400 mt-0.5">تطوير الأداء وسد الثغرات لضمان أعلى مستويات الأمان.</p>
                         </div>
                     </div>
                 </div>
@@ -457,82 +1307,82 @@
                     <div class="glass-card p-6 rounded-2xl border-rose-500/10">
                         <i class="fa-solid fa-heart text-rose-500 text-2xl mb-3"></i>
                         <h4 class="font-bold text-slate-200 mb-1">الشغف السيبراني</h4>
-                        <p class="text-xs text-slate-400 leading-relaxed">حب الاستكشاف وفهم كيف تدار الأنظمة الرقمية وكيف تحمى من التهديدات المتطورة عالمياً.</p>
+                        <p class="text-xs text-slate-400 leading-relaxed">حب الاستكشاف وفهم كيف تدار الأنظمة الرقمية وكيف تحمى من التهديدات.</p>
                     </div>
                     <div class="glass-card p-6 rounded-2xl border-blue-500/10">
-                        <i class="fa-solid fa-graduation-cap text-blue-400 text-2xl mb-3"></i>
-                        <h4 class="font-bold text-slate-200 mb-1">التعلم المستمر</h4>
-                        <p class="text-xs text-slate-400 leading-relaxed">عالم الأمن الرقمي يتغير كل دقيقة، والوقوف في مكاننا ليس خياراً بل نسعى للنمو المتواصل المعرفي.</p>
-                    </div>
-                    <div class="glass-card p-6 rounded-2xl border-amber-500/10">
-                        <i class="fa-solid fa-puzzle-piece text-amber-400 text-2xl mb-3"></i>
-                        <h4 class="font-bold text-slate-200 mb-1">حل المعضلات</h4>
-                        <p class="text-xs text-slate-400 leading-relaxed">مواجهة المشكلات التقنية والأمنية المعقدة وتفكيكها خطوة بخطوة وإيجاد الحلول الذكية لها.</p>
+                        <i class="fa-solid fa-briefcase text-blue-400 text-2xl mb-3"></i>
+                        <h4 class="font-bold text-slate-200 mb-1">الاستعداد لسوق العمل</h4>
+                        <p class="text-xs text-slate-400 leading-relaxed">بناء خبرات عملية تؤهلنا لفرص وظيفية متميزة في مجال الأمن السيبراني.</p>
                     </div>
                     <div class="glass-card p-6 rounded-2xl border-emerald-500/10">
-                        <i class="fa-solid fa-users text-emerald-400 text-2xl mb-3"></i>
-                        <h4 class="font-bold text-slate-200 mb-1">مجتمع آمن</h4>
-                        <p class="text-xs text-slate-400 leading-relaxed">المساهمة المباشرة والأصيلة في حماية الفضاء الرقمي للأفراد والمؤسسات لغدٍ أكثر موثوقية.</p>
+                        <i class="fa-solid fa-handshake-angle text-emerald-400 text-2xl mb-3"></i>
+                        <h4 class="font-bold text-slate-200 mb-1">العمل الجماعي</h4>
+                        <p class="text-xs text-slate-400 leading-relaxed">الإيمان بأن التعاون وتبادل المعرفة هو أساس بناء مجتمع سيبراني قوي.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-2xl border-amber-500/10">
+                        <i class="fa-solid fa-rocket text-amber-400 text-2xl mb-3"></i>
+                        <h4 class="font-bold text-slate-200 mb-1">الابتكار</h4>
+                        <p class="text-xs text-slate-400 leading-relaxed">السعي الدائم لتقديم حلول جديدة تواكب أحدث التهديدات السيبرانية.</p>
                     </div>
                 </div>
             </div>
-
         </div>
     </section>
 
-    <footer class="mt-24 border-t border-slate-900 bg-[#030508]/80 backdrop-blur-md py-12 px-4 relative">
-        <div class="max-w-6xl mx-auto flex flex-col items-center text-center gap-8">
-            
-            <div class="max-w-2xl">
-                <i class="fa-solid fa-quote-right text-3xl text-cyan-500/30 mb-2 block"></i>
-                <p class="tech-font text-lg md:text-xl font-bold tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-400">
-                    "NOT JUST A PROJECT, IT'S OUR CYBERSECURITY JOURNEY. TOGETHER, WE GROW."
-                </p>
+    <!-- ============ FOOTER ============ -->
+    <footer class="max-w-6xl mx-auto px-4 py-12 relative z-10">
+        <div class="glass-card p-8 rounded-3xl text-center border-cyan-500/20">
+            <h2 class="tech-font text-3xl font-black shimmer-text mb-3">R&M CYBER LAB</h2>
+            <p class="text-slate-400 text-sm mb-6">Building. Breaking. Learning. Securing.</p>
+            <div class="flex justify-center gap-4 mb-6">
+                <a href="https://github.com/ish3-is" target="_blank" class="w-11 h-11 rounded-full bg-slate-900 border border-slate-700 flex items-center justify-center text-slate-300 hover:text-cyan-400 hover:border-cyan-400 transition-all">
+                    <i class="fa-brands fa-github"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/meshjth" target="_blank" class="w-11 h-11 rounded-full bg-slate-900 border border-slate-700 flex items-center justify-center text-slate-300 hover:text-cyan-400 hover:border-cyan-400 transition-all">
+                    <i class="fa-brands fa-linkedin-in"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/remas-alqahtani-1674b33a8/" target="_blank" class="w-11 h-11 rounded-full bg-slate-900 border border-slate-700 flex items-center justify-center text-slate-300 hover:text-purple-400 hover:border-purple-400 transition-all">
+                    <i class="fa-brands fa-linkedin-in"></i>
+                </a>
             </div>
-
-            <div class="h-[1px] w-full max-w-md bg-slate-800"></div>
-
-            <div class="w-full flex flex-col md:flex-row items-center justify-between gap-6 px-4">
-                
-                <div class="text-right order-2 md:order-1">
-                    <p class="text-xs text-slate-500">Created by:</p>
-                    <h5 class="tech-font text-base font-bold text-slate-200 mt-0.5">
-                        <span class="text-blue-400">Meshal</span> & <span class="text-purple-400">Reemas</span>
-                    </h5>
-                    <p class="text-[11px] text-slate-400 mt-1">مشعل (M) - جامعة الملك خالد | ريماس (R) - جامعة بيشة</p>
-                </div>
-
-                <div class="flex items-center gap-4 order-1 md:order-2">
-                    <a href="https://github.com" target="_blank" class="w-11 h-11 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:border-white transition-all hover:shadow-[0_0_15px_rgba(255,255,255,0.1)]" title="GitHub">
-                        <i class="fa-brands fa-github text-xl"></i>
-                    </a>
-                    <a href="https://linkedin.com" target="_blank" class="w-11 h-11 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-cyan-400 hover:border-cyan-500 transition-all hover:shadow-[0_0_15px_rgba(0,210,255,0.2)]" title="LinkedIn">
-                        <i class="fa-brands fa-linkedin-in text-xl"></i>
-                    </a>
-                </div>
-
-                <div class="flex items-center gap-3 order-3">
-                    <div class="text-left hidden sm:block">
-                        <p class="text-xs font-bold text-slate-300">تابع رحلتنا</p>
-                        <p class="text-[10px] text-slate-500">امسح الكود لمتابعة المستجدات</p>
-                    </div>
-                    <div class="w-14 h-14 bg-white p-1 rounded-lg border border-cyan-500/30 shadow-[0_0_15px_rgba(0,210,255,0.1)]">
-                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://github.com" alt="QR Code" class="w-full h-full object-cover">
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="w-full pt-6 border-t border-slate-900 flex flex-wrap justify-center gap-6 text-[11px] text-slate-600 font-medium tracking-wider">
-                <span><i class="fa-solid fa-graduation-cap ml-0.5"></i> تعلم مستمر</span>
-                <span><i class="fa-solid fa-lightbulb ml-0.5"></i> ابتكار</span>
-                <span><i class="fa-solid fa-users ml-0.5"></i> تعاون</span>
-                <span><i class="fa-solid fa-arrow-up-right-dots ml-0.5"></i> تطوير مستمر</span>
-                <span><i class="fa-solid fa-shield-halved ml-0.5"></i> أثر حقيقي</span>
-            </div>
-
+            <div class="h-[1px] w-40 bg-gradient-to-r from-transparent via-cyan-400 to-transparent mx-auto mb-4"></div>
+            <p class="text-xs text-slate-500">© 2026 R&M Cyber Lab. Crafted with passion by Meshal & Remas.</p>
         </div>
     </footer>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Close mobile menu if open
+                    document.getElementById('mobileMenu').classList.add('hidden');
+                }
+            });
+        });
+    </script>
 
 </body>
 </html>
