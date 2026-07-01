@@ -202,7 +202,7 @@
             position: relative;
             z-index: 1;
         }
-        /* Status badges - FIXED */
+        /* Status badges */
         .status-badge {
             display: inline-flex;
             align-items: center;
@@ -294,7 +294,7 @@
         .nav-link:hover {
             color: #00D2FF;
         }
-        /* Planned projects - faded */
+        /* Planned projects */
         .planned-project {
             opacity: 0.5;
             filter: grayscale(0.6);
@@ -367,14 +367,45 @@
             height: 3px;
             background: linear-gradient(90deg, #10b981, #00D2FF, #8A2BE2);
         }
+        /* MR-SOC DualShield Special Card */
+        .dualshield-card {
+            background: linear-gradient(135deg, rgba(0, 210, 255, 0.08), rgba(138, 43, 226, 0.08));
+            border: 1px solid rgba(0, 210, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        .dualshield-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #00D2FF, #8A2BE2, #00D2FF);
+            background-size: 200% 100%;
+            animation: shimmer 3s linear infinite;
+        }
+        .dualshield-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, rgba(0, 210, 255, 0.05), transparent 30%);
+            animation: rotate 15s linear infinite;
+            pointer-events: none;
+        }
+        .dualshield-card > * {
+            position: relative;
+            z-index: 1;
+        }
     </style>
 </head>
 <body class="text-slate-200 overflow-x-hidden cyber-bg selection:bg-cyan-500 selection:text-slate-900">
 
-    <!-- Scan line - Back layer (z-index: 1) -->
     <div class="scan-line"></div>
     
-    <!-- Background glow orbs -->
     <div class="absolute top-20 left-10 w-96 h-96 bg-cyan-500/10 rounded-full blur-[120px] glow-orb pointer-events-none z-0"></div>
     <div class="absolute top-[40%] right-10 w-[450px] h-[450px] bg-purple-600/10 rounded-full blur-[150px] glow-orb pointer-events-none z-0" style="animation-delay: 2s;"></div>
     <div class="absolute bottom-20 left-20 w-80 h-80 bg-blue-600/10 rounded-full blur-[100px] glow-orb pointer-events-none z-0" style="animation-delay: 4s;"></div>
@@ -400,7 +431,6 @@
             </button>
         </div>
         
-        <!-- Mobile Menu -->
         <div id="mobileMenu" class="hidden md:hidden border-t border-slate-800 bg-slate-950/95">
             <div class="flex flex-col p-4 gap-3">
                 <a href="#home" class="text-slate-300 hover:text-cyan-400 py-2">الرئيسية</a>
@@ -470,7 +500,6 @@
             <p class="text-sm text-slate-400 max-w-2xl">شراكة طلابية تجمع بين الخبرات والمهارات لبناء مشاريع سيبرانية مبتكرة تساهم في تطوير المجتمع التقني وتمهيد الطريق لسوق العمل</p>
             
             <div class="flex flex-col md:flex-row items-center justify-center gap-12 w-full mt-6">
-                <!-- King Khalid University -->
                 <div class="flex flex-col items-center gap-4">
                     <div class="university-logo kku-logo flex items-center justify-center bg-white">
                         <img src="KKU.png" 
@@ -490,7 +519,6 @@
                     <i class="fa-solid fa-plus text-slate-600 text-3xl"></i>
                 </div>
                 
-                <!-- University of Bisha -->
                 <div class="flex flex-col items-center gap-4">
                     <div class="university-logo ub-logo flex items-center justify-center bg-white">
                         <img src="Bisha.png" 
@@ -523,7 +551,6 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <!-- Meshal -->
             <div class="glass-card p-8 rounded-3xl relative overflow-hidden group border-blue-600/20">
                 <div class="absolute -top-10 -left-10 text-9xl font-black tech-font text-blue-500/5 group-hover:text-blue-500/10 transition-colors select-none">M</div>
                 
@@ -565,7 +592,6 @@
                 </div>
             </div>
 
-            <!-- Remas -->
             <div class="glass-card p-8 rounded-3xl relative overflow-hidden group border-purple-600/20">
                 <div class="absolute -top-10 -left-10 text-9xl font-black tech-font text-purple-500/5 group-hover:text-purple-500/10 transition-colors select-none">R</div>
                 
@@ -616,7 +642,6 @@
         </div>
 
         <div class="timeline">
-            <!-- Item 1 - يناير 2026 -->
             <div class="timeline-item">
                 <div class="timeline-dot completed"></div>
                 <div class="glass-card p-6 rounded-2xl border-emerald-500/30">
@@ -633,7 +658,6 @@
                 </div>
             </div>
 
-            <!-- Item 2 - دورة الاختراق الأخلاقي -->
             <div class="timeline-item">
                 <div class="timeline-dot completed"></div>
                 <div class="glass-card p-6 rounded-2xl border-cyan-500/30">
@@ -656,7 +680,6 @@
                 </div>
             </div>
 
-            <!-- Item 3 - أبريل 2026 -->
             <div class="timeline-item">
                 <div class="timeline-dot completed"></div>
                 <div class="glass-card p-6 rounded-2xl border-purple-500/30">
@@ -673,7 +696,6 @@
                 </div>
             </div>
 
-            <!-- Item 4 - مايو 2026 -->
             <div class="timeline-item">
                 <div class="timeline-dot completed"></div>
                 <div class="glass-card p-6 rounded-2xl border-blue-500/30">
@@ -686,7 +708,6 @@
                 </div>
             </div>
 
-            <!-- Item 5 - يونيو 2026 -->
             <div class="timeline-item">
                 <div class="timeline-dot completed"></div>
                 <div class="glass-card p-6 rounded-2xl border-emerald-500/30">
@@ -703,7 +724,6 @@
                 </div>
             </div>
 
-            <!-- Item 6 - يوليو 2026 -->
             <div class="timeline-item">
                 <div class="timeline-dot completed"></div>
                 <div class="glass-card p-6 rounded-2xl border-rose-500/30">
@@ -714,6 +734,23 @@
                     <h3 class="text-lg font-bold text-white mb-1">🧠 Behavioral Analysis - UEBA</h3>
                     <p class="text-sm text-slate-400 leading-relaxed mb-3">نظام التحليل السلوكي والمصادقة المستمرة باستخدام الذكاء الاصطناعي</p>
                     <a href="https://github.com/ish3-is/R-M-UEBA-AI-Engine" target="_blank" class="inline-flex items-center gap-1 text-xs text-rose-400 hover:text-rose-300">
+                        <i class="fa-brands fa-github"></i>
+                        <span>عرض المشروع</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- ✨ NEW: MR-SOC DualShield Timeline Item -->
+            <div class="timeline-item">
+                <div class="timeline-dot completed"></div>
+                <div class="glass-card p-6 rounded-2xl border-cyan-500/40" style="background: linear-gradient(135deg, rgba(0, 210, 255, 0.05), rgba(138, 43, 226, 0.05));">
+                    <div class="flex items-center justify-between mb-2 flex-wrap gap-2">
+                        <span class="tech-font text-xs font-bold" style="background: linear-gradient(90deg, #00D2FF, #8A2BE2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">يوليو 2026</span>
+                        <span class="status-badge status-completed">COMPLETED</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-1">🛡️ MR-SOC — DualShield</h3>
+                    <p class="text-sm text-slate-400 leading-relaxed mb-3">منصة SOC مؤتمتة بالكامل مع Wazuh SIEM وSOAR ولوحات معلومات حية</p>
+                    <a href="https://github.com/ish3-is/MR-SOC---DualShield" target="_blank" class="inline-flex items-center gap-1 text-xs text-cyan-400 hover:text-purple-400 transition-colors">
                         <i class="fa-brands fa-github"></i>
                         <span>عرض المشروع</span>
                     </a>
@@ -736,7 +773,98 @@
         </div>
 
         <div class="space-y-8">
-            <!-- RM_Sentinel - Wide Card -->
+
+            <!-- ✨ NEW: MR-SOC DualShield - Featured First -->
+            <div class="dualshield-card p-6 md:p-8 rounded-3xl shadow-[0_0_40px_rgba(0,210,255,0.15)]">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+                    <div class="lg:col-span-2">
+                        <div class="flex items-start justify-between mb-4 flex-wrap gap-3">
+                            <div class="flex items-center gap-3">
+                                <div class="w-14 h-14 rounded-xl flex items-center justify-center text-2xl shadow-[0_0_20px_rgba(0,210,255,0.3)]" style="background: linear-gradient(135deg, rgba(0, 210, 255, 0.2), rgba(138, 43, 226, 0.2)); border: 1px solid rgba(0, 210, 255, 0.4);">
+                                    <i class="fa-solid fa-shield-halved text-cyan-300"></i>
+                                </div>
+                                <div>
+                                    <h3 class="tech-font text-2xl md:text-3xl font-black text-white" style="background: linear-gradient(90deg, #00D2FF, #8A2BE2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">MR-SOC — DualShield</h3>
+                                    <span class="text-xs font-medium" style="color: #00D2FF;">Automated Security Operations Center</span>
+                                </div>
+                            </div>
+                            <div class="flex gap-2 flex-wrap">
+                                <span class="status-badge status-completed">COMPLETED</span>
+                                <span class="text-xs px-2 py-1 rounded-full bg-gradient-to-r from-cyan-500/20 to-purple-500/20 border border-cyan-400/30 text-cyan-300 font-bold">FEATURED</span>
+                            </div>
+                        </div>
+
+                        <!-- Collaboration badge -->
+                        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-800/50 border border-slate-700 mb-4 text-xs">
+                            <i class="fa-solid fa-users text-cyan-400"></i>
+                            <span class="text-slate-300">تعاون مشترك:</span>
+                            <span class="text-cyan-300 font-semibold">مشعل</span>
+                            <span class="text-slate-500">+</span>
+                            <span class="text-purple-300 font-semibold">ريماس</span>
+                        </div>
+                        
+                        <p class="text-slate-300 text-base leading-relaxed mb-5">
+                            منصة <strong class="text-cyan-300">SOC مؤتمتة بالكامل</strong> تدمج بين Wazuh SIEM وSOAR Engine لاكتشاف التهديدات والاستجابة لها في الوقت الفعلي. النظام يكتشف هجمات SSH خلال ثانية، يحظر الـ IP المهاجم خلال 3 ثوانٍ، يرسل تنبيهات Telegram فورية، ينشئ تذاكر في TheHive، ويوفر لوحات معلومات احترافية مع تقارير PDF.
+                        </p>
+
+                        <!-- Performance Metrics -->
+                        <div class="grid grid-cols-3 gap-3 mb-5">
+                            <div class="p-3 rounded-xl bg-slate-900/60 border border-cyan-500/20 text-center">
+                                <div class="tech-font text-lg font-black text-cyan-400">&lt;1s</div>
+                                <div class="text-[10px] text-slate-400 mt-1">Detection</div>
+                            </div>
+                            <div class="p-3 rounded-xl bg-slate-900/60 border border-purple-500/20 text-center">
+                                <div class="tech-font text-lg font-black text-purple-400">&lt;3s</div>
+                                <div class="text-[10px] text-slate-400 mt-1">Response</div>
+                            </div>
+                            <div class="p-3 rounded-xl bg-slate-900/60 border border-emerald-500/20 text-center">
+                                <div class="tech-font text-lg font-black text-emerald-400">100%</div>
+                                <div class="text-[10px] text-slate-400 mt-1">Automation</div>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-wrap gap-2 mb-5">
+                            <span class="text-xs px-3 py-1 rounded-full bg-cyan-950/50 text-cyan-300 border border-cyan-500/30">Wazuh SIEM</span>
+                            <span class="text-xs px-3 py-1 rounded-full bg-blue-950/50 text-blue-300 border border-blue-500/30">Python SOAR</span>
+                            <span class="text-xs px-3 py-1 rounded-full bg-purple-950/50 text-purple-300 border border-purple-500/30">TheHive</span>
+                            <span class="text-xs px-3 py-1 rounded-full bg-emerald-950/50 text-emerald-300 border border-emerald-500/30">Grafana</span>
+                            <span class="text-xs px-3 py-1 rounded-full bg-amber-950/50 text-amber-300 border border-amber-500/30">Flask</span>
+                            <span class="text-xs px-3 py-1 rounded-full bg-rose-950/50 text-rose-300 border border-rose-500/30">OpenSearch</span>
+                            <span class="text-xs px-3 py-1 rounded-full bg-sky-950/50 text-sky-300 border border-sky-500/30">Telegram Bot</span>
+                            <span class="text-xs px-3 py-1 rounded-full bg-indigo-950/50 text-indigo-300 border border-indigo-500/30">Docker</span>
+                            <span class="text-xs px-3 py-1 rounded-full bg-pink-950/50 text-pink-300 border border-pink-500/30">Chart.js</span>
+                        </div>
+
+                        <div class="flex flex-wrap gap-3 mb-5">
+                            <a href="https://github.com/ish3-is/MR-SOC---DualShield" target="_blank" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-white font-bold text-sm hover:shadow-[0_0_25px_rgba(0,210,255,0.5)] transition-all" style="background: linear-gradient(135deg, #00D2FF, #8A2BE2);">
+                                <i class="fa-brands fa-github"></i> عرض على GitHub
+                            </a>
+                            <a href="https://github.com/ish3-is/MR-SOC---DualShield" target="_blank" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-cyan-500/50 text-cyan-300 font-bold text-sm hover:border-purple-400 hover:text-purple-400 transition-all">
+                                <i class="fa-solid fa-book-open"></i> التوثيق
+                            </a>
+                        </div>
+                        <div class="pt-4 border-t border-slate-700/50">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-xs text-slate-400">تاريخ الإنجاز</span>
+                                <span class="tech-font text-xs font-bold" style="color: #00D2FF;">يوليو 2026</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 100%"></div>
+                            </div>
+                            <p class="text-xs text-slate-500 mt-1 text-left">100% مكتمل</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-center">
+                        <div class="video-placeholder w-full" style="border-color: rgba(0, 210, 255, 0.4); background: linear-gradient(135deg, rgba(0, 210, 255, 0.1), rgba(138, 43, 226, 0.1));">
+                            <i class="fa-solid fa-circle-play text-5xl" style="color: #00D2FF;"></i>
+                            <span class="text-sm text-slate-400">Demo Video</span>
+                            <span class="text-xs text-slate-500">قريباً</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RM_Sentinel -->
             <div class="completed-card p-6 md:p-8 rounded-3xl">
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
                     <div class="lg:col-span-2">
@@ -791,7 +919,7 @@
                 </div>
             </div>
 
-            <!-- UEBA Project - Wide Card -->
+            <!-- UEBA Project -->
             <div class="completed-card p-6 md:p-8 rounded-3xl" style="border-color: rgba(244, 63, 94, 0.25); background: linear-gradient(135deg, rgba(244, 63, 94, 0.05), rgba(138, 43, 226, 0.05));">
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
                     <div class="lg:col-span-2">
@@ -848,7 +976,7 @@
             </div>
         </div>
 
-        <!-- In Progress & Planned Projects -->
+        <!-- In Progress -->
         <div class="mt-16">
             <div class="text-center mb-10">
                 <div class="inline-block mb-3">
@@ -1351,7 +1479,6 @@
     </footer>
 
     <script>
-        // Navbar scroll effect
         window.addEventListener('scroll', function() {
             const navbar = document.querySelector('.navbar');
             if (window.scrollY > 50) {
@@ -1361,13 +1488,11 @@
             }
         });
 
-        // Mobile menu toggle
         function toggleMobileMenu() {
             const menu = document.getElementById('mobileMenu');
             menu.classList.toggle('hidden');
         }
 
-        // Smooth scroll for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -1377,7 +1502,6 @@
                         behavior: 'smooth',
                         block: 'start'
                     });
-                    // Close mobile menu if open
                     document.getElementById('mobileMenu').classList.add('hidden');
                 }
             });
